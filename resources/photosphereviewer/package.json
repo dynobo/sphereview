@@ -1,0 +1,21 @@
+{
+  "name": "www",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "debug": "http-server ./dist -p 8080 -o index.html"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "vite": "^6.3.5",
+    "vite-plugin-html-minify": "^1.0.0",
+    "vite-plugin-singlefile": "^2.2.0"
+  },
+  "dependencies": {
+    "@photo-sphere-viewer/core": "^5.13.3"
+  }
+}

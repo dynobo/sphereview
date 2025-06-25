@@ -1,0 +1,38 @@
+using Gtk 4.0;
+using Adw 1;
+using WebKit 6.0;
+
+template $Window : Adw.ApplicationWindow {
+  title: "SphereView";
+  default-width: 800;
+  default-height: 600;
+
+  Box {
+    orientation: vertical;
+
+    Adw.HeaderBar headerbar {
+      [start]
+      Button open_button {
+        icon-name: "document-open-symbolic";
+        tooltip-text: "Open File";
+        action-name: "win.open-file";
+      }
+
+      title-widget: Label window_title {
+        label: "SphereView";
+        halign: center;
+      };
+
+      [end]
+      MenuButton menu_button {
+        icon-name: "open-menu-symbolic";
+        tooltip-text: "Main Menu";
+      }
+    }
+
+    WebKit.WebView web_view {
+      vexpand: true;
+      hexpand: true;
+    }
+  }
+}

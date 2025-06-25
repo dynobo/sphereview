@@ -1,0 +1,228 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ShortcutsDialog : Adw.Window {
+  title: "Keyboard Shortcuts";
+  modal: true;
+  resizable: false;
+  width-request: 500;
+
+  Box {
+    orientation: vertical;
+
+    Adw.HeaderBar {
+      title-widget: Label {
+        label: "Keyboard Shortcuts";
+        halign: center;
+      };
+    }
+
+    Box {
+      orientation: horizontal;
+      halign: center;
+
+      Box {
+        orientation: vertical;
+        margin-top: 16;
+        margin-bottom: 32;
+        margin-start: 24;
+        margin-end: 24;
+        spacing: 12;
+
+        Label {
+          halign: start;
+          label: "<b>General</b>";
+          use-markup: true;
+          margin-top: 12;
+        }
+
+        Box {
+          orientation: horizontal;
+          spacing: 8;
+
+          Label {
+            halign: start;
+            label: "<tt>Ctrl</tt> + <tt>o</tt>";
+            use-markup: true;
+            margin-end: 24;
+          }
+
+          Label {
+            halign: end;
+            hexpand: true;
+            label: "Open File";
+          }
+        }
+
+        Box {
+          orientation: horizontal;
+          spacing: 8;
+
+          Label {
+            halign: start;
+            label: "<tt>F11</tt>";
+            use-markup: true;
+            margin-end: 24;
+          }
+
+          Label {
+            halign: end;
+            hexpand: true;
+            label: "Toggle Fullscreen";
+          }
+        }
+
+        Box {
+          orientation: horizontal;
+          spacing: 8;
+
+          Label {
+            halign: start;
+            label: "<tt>Ctrl</tt> + <tt>?</tt>";
+            use-markup: true;
+            margin-end: 24;
+          }
+
+          Label {
+            halign: end;
+            hexpand: true;
+            label: "View Shortcuts";
+          }
+        }
+
+        Box {
+          orientation: horizontal;
+          spacing: 8;
+
+          Label {
+            halign: start;
+            label: "<tt>Ctrl</tt> + <tt>q</tt>";
+            use-markup: true;
+            margin-end: 24;
+          }
+
+          Label {
+            halign: end;
+            hexpand: true;
+            label: "Quit";
+          }
+        }
+
+        Label {
+          halign: start;
+          label: "<b>Viewer</b>";
+          use-markup: true;
+          margin-top: 12;
+        }
+
+        Box {
+          orientation: horizontal;
+          spacing: 8;
+
+          Label {
+            halign: start;
+            label: "<tt>⬆</tt>  ╱  <tt>k</tt>";
+            use-markup: true;
+            margin-end: 24;
+          }
+
+          Label {
+            halign: end;
+            hexpand: true;
+            label: "Rotate Up";
+          }
+        }
+
+        Box {
+          orientation: horizontal;
+          spacing: 8;
+
+          Label {
+            halign: start;
+            label: "<tt>⬇</tt>  ╱  <tt>j</tt>";
+            use-markup: true;
+            margin-end: 24;
+          }
+
+          Label {
+            halign: end;
+            hexpand: true;
+            label: "Rotate Down";
+          }
+        }
+
+        Box {
+          orientation: horizontal;
+          spacing: 8;
+
+          Label {
+            halign: start;
+            label: "<tt>➡</tt>  ╱  <tt>l</tt>";
+            use-markup: true;
+            margin-end: 24;
+          }
+
+          Label {
+            halign: end;
+            hexpand: true;
+            label: "Rotate Right";
+          }
+        }
+
+        Box {
+          orientation: horizontal;
+          spacing: 8;
+
+          Label {
+            halign: start;
+            label: "<tt>⬅</tt>  ╱  <tt>h</tt>";
+            use-markup: true;
+            margin-end: 24;
+          }
+
+          Label {
+            halign: end;
+            hexpand: true;
+            label: "Rotate Left";
+          }
+        }
+
+        Box {
+          orientation: horizontal;
+          spacing: 8;
+
+          Label {
+            halign: start;
+            label: "<tt>PgUp</tt>  ╱  <tt>i</tt>";
+            use-markup: true;
+            margin-end: 24;
+          }
+
+          Label {
+            halign: end;
+            hexpand: true;
+            label: "Zoom In";
+          }
+        }
+
+        Box {
+          orientation: horizontal;
+          spacing: 8;
+
+          Label {
+            halign: start;
+            label: "<tt>PgDn</tt>  ╱  <tt>o</tt>";
+            use-markup: true;
+            margin-end: 24;
+          }
+
+          Label {
+            halign: end;
+            hexpand: true;
+            label: "Zoom Out";
+          }
+        }
+      }
+    }
+  }
+}
