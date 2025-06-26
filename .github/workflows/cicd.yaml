@@ -1,0 +1,43 @@
+name: CI/CD
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      refToBuild:
+        description: "Branch, tag or commit SHA1 to build"
+        required: true
+        type: string
+
+concurrency:
+  group: cicd-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, windows-2025, ubuntu-24.04]
+    steps:
+      # Setup environment
+      - uses: actions/checkout@v4.2.2
+        if: ${{ github.event_name != 'workflow_dispatch' }}
+      - uses: actions/checkout@v4.2.2
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        with:
+          ref: ${{ inputs.refToBuild }}
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: rustfmt
+          
+      - name: Rustfmt Check
+        uses: actions-rust-lang/rustfmt@v1
+
+      - run: cargo check
+      - run: cargo build --release
