@@ -24,9 +24,7 @@ This my very first Rust Application. It stands on the shoulders of the fabulous 
 
 ## Installation
 
-- Install FlatPak (_comming soon!_) \
-  _or_
-- Download binary from [latest release](https://github.com/dynobo/sphereview/releases), `chmod +x` and run. (_comming soon!_)
+- Install from FlatHub (_comming soon!_) 
 
 ## Features
 
