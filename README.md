@@ -1,42 +1,57 @@
-# SphereView
+<p align="center">
+<img src="https://github.com/user-attachments/assets/9286c74d-7a77-4db6-b4c9-5cf13082fe57" height=64 /> 
+</p>
 
-**_Image viewer for equirectangular photospheres and panoramas._**
+<p align="center">
+<em><strong>Image viewer for 360° equirectangular photospheres and panoramas.</strong></em>
+</p>
 
-[![Coverage Status](https://img.shields.io/coverallsCoverage/github/dynobo/sphereview?label=Coverage&branch=main)](https://coveralls.io/github/dynobo/sphereview)
-[![CodeQL](https://img.shields.io/github/actions/workflow/status/dynobo/sphereview/cicd.yaml?label=CodeQL&branch=main)](https://github.com/dynobo/sphereview/security/code-scanning/tools/CodeQL/status/)
-[![GitHub](https://img.shields.io/github/downloads/dynobo/sphereview/total?label=Github%20downloads&color=blue)](https://hanadigital.github.io/grev/?user=dynobo&repo=sphereview)
-[![Flathub](https://img.shields.io/flathub/downloads/com.github.dynobo.sphereview?label=Flathub%20downloads&color=blue)](https://flathub.org/apps/details/com.github.dynobo.sphereview)
-[![AUR](https://img.shields.io/aur/votes/sphereview?label=AUR%20votes&color=blue)](https://aur.archlinux.org/packages/sphereview)
+<p align="center">
+<a href="https://github.com/dynobo/sphereview/actions?query=workflow%3Acicd+event%3Apush+branch%3Amain" target="_blank">
+    <img src="https://github.com/dynobo/sphereview/actions/workflows/cicd.yml/badge.svg?event=push&branch=main" alt="CI/CD">
+</a>
+<a href="https://github.com/dynobo/sphereview/security/code-scanning/tools/CodeQL/status/"><img src="https://img.shields.io/github/actions/workflow/status/dynobo/sphereview/cicd.yaml?label=CodeQL&branch=main" alt="CodeQL"></a>
+<a href="https://hanadigital.github.io/grev/?user=dynobo&repo=sphereview"><img src="https://img.shields.io/github/downloads/dynobo/sphereview/total?label=Github%20downloads&color=blue" alt="GitHub"></a>
+<a href="https://flathub.org/apps/details/com.github.dynobo.sphereview"><img src="https://img.shields.io/flathub/downloads/com.github.dynobo.sphereview?label=Flathub%20downloads&color=blue" alt="Flathub"></a>
+</p>
 
-<a href="https://www.buymeacoffee.com/dynobo" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 40px !important;" ></a>
-
+<p align="center">
 **Links:** [Source Code](https://github.com/dynobo/sphereview) |
 [Releases](https://github.com/dynobo/sphereview/releases) |
 [Changelog](https://github.com/dynobo/sphereview/blob/main/CHANGELOG)
+</p>
 
-[![Screencast](https://user-images.githubusercontent.com/11071876/189767585-8bc45c18-8392-411d-84dc-cef1cb5dbc47.gif)](https://raw.githubusercontent.com/dynobo/sphereview/main/assets/sphereview.gif)
+[![Screencast](https://github.com/user-attachments/assets/3e0f2db4-e186-495b-97b5-ab3c379dcf68)](https://raw.githubusercontent.com/dynobo/sphereview/main/resources/assets/sphereview.gif)
 
 This my very first Rust Application. It stands on the shoulders of the fabulous JavaScript library [Photo Sphere Viewer](https://photo-sphere-viewer.js.org/) which deserves all credits for the image rendering and controls. SphereView just wraps it in a GTK interface to provide a desktop integration.
 
 ## Installation
 
-- **Install FlatPak (recommended, comming soon)**
+- Install FlatPak (_comming soon!_) \
   _or_
-- Download [latest release](https://github.com/dynobo/sphereview/releases), make executable and run.
+- Download binary from [latest release](https://github.com/dynobo/sphereview/releases), `chmod +x` and run.
 
 ## Features
 
-- Simplicity: Lean user interface with minimal functionality
+- Simplicity: Lean interface with minimal features
+- Privacy: 100% offline, no telemetry
 - Supported formats: JPEG, PNG, WEBP
 - Supported projection: Equirectanglar (e.g. used by Google Camera)
-- Privacy: 100% offline, no telemetry
 
 ## Development
 
-Prerequisites for development are: [rust](https://www.rust-lang.org/tools/install), [node.js](https://nodejs.org/en/download) (v24.x)
-
-
 ```sh
+# Install dependencies (Debian/Ubuntu)
+sudo apt install -y \
+  rustup \
+  nodejs npm \
+  libgtk-4-dev \
+  libadwaita-1-dev \
+  libglib2.0-dev \
+  libwebkitgtk-6.0-dev \
+  blueprint-compiler
+
+# Clone repo
 git clone https://github.com/dynobo/sphereview.git
 
 # Change into directory with html/js  
