@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/user-attachments/assets/9286c74d-7a77-4db6-b4c9-5cf13082fe57" height=64 /> 
+<img src="https://raw.githubusercontent.com/dynobo/sphereview/refs/heads/main/resources/assets/title.png" alt="SphereView" /> 
 </p>
 
 <p align="center">
@@ -7,21 +7,21 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/dynobo/sphereview/actions?query=workflow%3Acicd+event%3Apush+branch%3Amain" target="_blank">
-    <img src="https://github.com/dynobo/sphereview/actions/workflows/cicd.yml/badge.svg?event=push&branch=main" alt="CI/CD">
-</a>
+<a href="https://github.com/dynobo/sphereview/actions/workflows/cicd.yaml" target="_blank"><img src="https://github.com/dynobo/sphereview/actions/workflows/cicd.yaml/badge.svg?branch=main" alt="CI/CD"></a>
 <a href="https://github.com/dynobo/sphereview/security/code-scanning/tools/CodeQL/status/"><img src="https://img.shields.io/github/actions/workflow/status/dynobo/sphereview/cicd.yaml?label=CodeQL&branch=main" alt="CodeQL"></a>
 <a href="https://hanadigital.github.io/grev/?user=dynobo&repo=sphereview"><img src="https://img.shields.io/github/downloads/dynobo/sphereview/total?label=Github%20downloads&color=blue" alt="GitHub"></a>
 <a href="https://flathub.org/apps/details/com.github.dynobo.sphereview"><img src="https://img.shields.io/flathub/downloads/com.github.dynobo.sphereview?label=Flathub%20downloads&color=blue" alt="Flathub"></a>
 </p>
 
 <p align="center">
-**Links:** [Source Code](https://github.com/dynobo/sphereview) |
-[Releases](https://github.com/dynobo/sphereview/releases) |
-[Changelog](https://github.com/dynobo/sphereview/blob/main/CHANGELOG)
+Links: <a href="https://github.com/dynobo/sphereview">Source Code</a> |
+<a href="https://github.com/dynobo/sphereview/releases">Releases</a> |
+<a href="https://github.com/dynobo/sphereview/blob/main/CHANGELOG">Changelog</a>
 </p>
 
-[![Screencast](https://github.com/user-attachments/assets/3e0f2db4-e186-495b-97b5-ab3c379dcf68)](https://raw.githubusercontent.com/dynobo/sphereview/main/resources/assets/sphereview.gif)
+<p align="center">
+<img src="https://raw.githubusercontent.com/dynobo/sphereview/refs/heads/main/resources/assets/screencast.gif" alt="Screencast of SphereView in action" /> 
+</p>
 
 This my very first Rust Application. It stands on the shoulders of the fabulous JavaScript library [Photo Sphere Viewer](https://photo-sphere-viewer.js.org/) which deserves all credits for the image rendering and controls. SphereView just wraps it in a GTK interface to provide a desktop integration.
 
