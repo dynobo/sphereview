@@ -23,21 +23,49 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-15, windows-2025, ubuntu-24.04]
+        os: [ubuntu-24.04, ubuntu-24.04-arm]
     steps:
-      # Setup environment
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            libgtk-4-dev \
+            libadwaita-1-dev \
+            libglib2.0-dev \
+            libwebkitgtk-6.0-dev \
+            blueprint-compiler
+            
       - uses: actions/checkout@v4.2.2
-        if: ${{ github.event_name != 'workflow_dispatch' }}
-      - uses: actions/checkout@v4.2.2
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        with:
-          ref: ${{ inputs.refToBuild }}
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
-        with:
-          components: rustfmt
-          
-      - name: Rustfmt Check
-        uses: actions-rust-lang/rustfmt@v1
 
-      - run: cargo check
-      - run: cargo build --release
+      - name: Format check
+        run: cargo fmt --all -- --check
+
+      - name: Build
+        run: cargo build --release -v
+        env:
+          RUST_BACKTRACE: 1
+
+      - name: Rename binary
+        run: |
+          ls -la ./target/release/
+          mv ./target/release/sphereview ./sphereview-linux-${{ endsWith(matrix.os, 'arm') && 'arm64' || 'x64' }}
+          ls -la
+
+      # For security reasons, github doesn't allow setting envvars using expressions
+      # directly. Therefore, we need an extra step:
+      - name: Set current date as env variable
+        shell: bash -l {0}
+        run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+
+      - name: Internal release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Internal
+          body: "Only for internal tests. Should not be published. [${{ env.NOW }}]"
+          draft: true
+          prerelease: true
+          tag_name: internal
+          files: |
+            sphereview-linux-x64
+            sphereview-linux-arm64
+          fail_on_unmatched_files: false
