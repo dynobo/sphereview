@@ -16,9 +16,9 @@
 </p>
 
 <p align="center">
-**Links:** [Source Code](https://github.com/dynobo/sphereview) |
-[Releases](https://github.com/dynobo/sphereview/releases) |
-[Changelog](https://github.com/dynobo/sphereview/blob/main/CHANGELOG)
+**Links:** <a href="https://github.com/dynobo/sphereview">Source Code</a> |
+<a href="https://github.com/dynobo/sphereview/releases">Releases</a> |
+<a href="https://github.com/dynobo/sphereview/blob/main/CHANGELOG">Changelog</a>
 </p>
 
 <p align="center">
