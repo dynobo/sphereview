@@ -21,7 +21,9 @@
 [Changelog](https://github.com/dynobo/sphereview/blob/main/CHANGELOG)
 </p>
 
-[![Screencast](https://github.com/user-attachments/assets/3e0f2db4-e186-495b-97b5-ab3c379dcf68)](https://raw.githubusercontent.com/dynobo/sphereview/main/resources/assets/sphereview.gif)
+<p align="center">
+<img src="https://raw.githubusercontent.com/dynobo/sphereview/refs/heads/main/resources/assets/screencast.gif" alt="Screencast of SphereView in action" /> 
+</p>
 
 This my very first Rust Application. It stands on the shoulders of the fabulous JavaScript library [Photo Sphere Viewer](https://photo-sphere-viewer.js.org/) which deserves all credits for the image rendering and controls. SphereView just wraps it in a GTK interface to provide a desktop integration.
 
