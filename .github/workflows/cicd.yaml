@@ -17,8 +17,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
-    name: Test
+  cicd:
+    name: CI/CD
+    permissions:
+      contents: write
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -59,6 +61,7 @@ jobs:
 
       - name: Internal release
         uses: softprops/action-gh-release@v2
+        if: github.repository_owner == 'dynobo'
         with:
           name: Internal
           body: "Only for internal tests. Should not be published. [${{ env.NOW }}]"
@@ -69,3 +72,13 @@ jobs:
             sphereview-linux-x64
             sphereview-linux-arm64
           fail_on_unmatched_files: false
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: |
+          startsWith(github.ref, 'refs/tags/v')
+          && github.repository_owner == 'dynobo'
+        with:
+          body: "See [changelog](https://github.com/dynobo/sphereview/blob/main/CHANGELOG) for details."
+          draft: true
+          prerelease: false
