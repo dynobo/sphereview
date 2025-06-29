@@ -5,9 +5,8 @@
 <p align="center">
 <em><strong>Image viewer for 360° equirectangular photospheres and panoramas.</strong></em>
 </p>
-
-<p align="center">
-<a href="https://github.com/dynobo/sphereview/actions?query=workflow%3ATest+event%3Apush+branch%3Amain" target="_blank">
+[![CI/CD]()](https://github.com/dynobo/sphereview/actions/workflows/cicd.yaml)
+<a href="https://github.com/dynobo/sphereview/actions/workflows/cicd.yaml" target="_blank">
     <img src="https://github.com/dynobo/sphereview/actions/workflows/Test/badge.svg?event=push&branch=main" alt="CI/CD">
 </a>
 <a href="https://github.com/dynobo/sphereview/security/code-scanning/tools/CodeQL/status/"><img src="https://img.shields.io/github/actions/workflow/status/dynobo/sphereview/cicd.yaml?label=CodeQL&branch=main" alt="CodeQL"></a>
