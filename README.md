@@ -18,10 +18,7 @@ Links: <a href="https://github.com/dynobo/sphereview">Source Code</a> |
 <a href="https://github.com/dynobo/sphereview/releases">Releases</a> |
 <a href="https://github.com/dynobo/sphereview/blob/main/CHANGELOG">Changelog</a>
 </p>
-
-<p align="center">
-<img src="https://raw.githubusercontent.com/dynobo/sphereview/refs/heads/main/resources/assets/screencast.gif" alt="Screencast of SphereView in action" /> 
-</p>
+<br/>
 
 This my very first Rust Application. It stands on the shoulders of the fabulous JavaScript library [Photo Sphere Viewer](https://photo-sphere-viewer.js.org/) which deserves all credits for the image rendering and controls. SphereView just wraps it in a GTK interface to provide a desktop integration.
 
@@ -33,10 +30,17 @@ This my very first Rust Application. It stands on the shoulders of the fabulous 
 
 ## Features
 
-- Simplicity: Lean interface with minimal features
-- Privacy: 100% offline, no telemetry
-- Supported formats: JPEG, PNG, WEBP
-- Supported projection: Equirectanglar (e.g. used by Google Camera)
+- View panoramas and photospheres interactively
+- Lean interface with minimal features
+- 100% offline, no telemetry
+- Supports Equirectanglar projection (e.g. used by Google Camera)
+- Supports formats like JPEG, PNG, WEBP
+
+## Screencast
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/dynobo/sphereview/refs/heads/main/resources/assets/screencast.gif" alt="Screencast of SphereView in action" width="700"/> 
+</p>
 
 ## Development
 
