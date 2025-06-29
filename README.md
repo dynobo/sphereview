@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/user-attachments/assets/9286c74d-7a77-4db6-b4c9-5cf13082fe57" height=64 /> 
+<img src="https://github.com/user-attachments/assets/9286c74d-7a77-4db6-b4c9-5cf13082fe57" alt="SphereView" /> 
 </p>
 
 <p align="center">
