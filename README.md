@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/user-attachments/assets/9286c74d-7a77-4db6-b4c9-5cf13082fe57" alt="SphereView" /> 
+<img src="https://raw.githubusercontent.com/dynobo/sphereview/refs/heads/main/resources/assets/title.png" alt="SphereView" /> 
 </p>
 
 <p align="center">
