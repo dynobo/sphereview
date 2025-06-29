@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/dynobo/sphereview/actions?query=workflow%3Acicd+event%3Apush+branch%3Amain" target="_blank">
-    <img src="https://github.com/dynobo/sphereview/actions/workflows/cicd.yml/badge.svg?event=push&branch=main" alt="CI/CD">
+<a href="https://github.com/dynobo/sphereview/actions?query=workflow%3ATest+event%3Apush+branch%3Amain" target="_blank">
+    <img src="https://github.com/dynobo/sphereview/actions/workflows/Test/badge.svg?event=push&branch=main" alt="CI/CD">
 </a>
 <a href="https://github.com/dynobo/sphereview/security/code-scanning/tools/CodeQL/status/"><img src="https://img.shields.io/github/actions/workflow/status/dynobo/sphereview/cicd.yaml?label=CodeQL&branch=main" alt="CodeQL"></a>
 <a href="https://hanadigital.github.io/grev/?user=dynobo&repo=sphereview"><img src="https://img.shields.io/github/downloads/dynobo/sphereview/total?label=Github%20downloads&color=blue" alt="GitHub"></a>
