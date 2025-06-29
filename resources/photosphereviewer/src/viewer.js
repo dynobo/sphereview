@@ -1,3 +1,4 @@
+import { AutorotatePlugin } from '@photo-sphere-viewer/autorotate-plugin';
 import { Viewer } from '@photo-sphere-viewer/core';
 import '@photo-sphere-viewer/core/index.css';
 import './style.css';
@@ -8,7 +9,7 @@ const viewer = new Viewer({
     keyboard: "always",
     panorama: window.location.pathname.endsWith("index.html") ? "demo.webp" : "",
     caption: "",
-    navbar: ["zoom", "move", "caption", "fullscreen"],
+    navbar: ["autorotate", "zoom", "move", "caption", "fullscreen"],
     keyboardActions: {
         // Note keys which might need modifiers (e.g. '+') do not work reliably!
         'ArrowUp': 'ROTATE_UP',
@@ -24,7 +25,14 @@ const viewer = new Viewer({
         'h': 'ROTATE_LEFT',
         'i': 'ZOOM_IN',
         'o': 'ZOOM_OUT',
-    }
+    },
+    plugins: [
+        [AutorotatePlugin, {
+            autostartDelay: null,
+            autostartOnIdle: false,
+            autorotateSpeed: '1rpm',
+        }],
+    ],
 });
 
 // Keep reference to blob url for memory management
@@ -40,10 +48,10 @@ window.setPanoramaImageFromBase64 = function (base64, mimeType) {
     try {
         // Convert base64 to binary
         const binaryString = atob(base64);
-        
+
         // Create byte array directly from the binary string
         const bytes = Uint8Array.from(binaryString, char => char.charCodeAt(0));
-        
+
         // Create blob directly from the binary data
         const blob = new Blob([bytes], { type: mimeType });
         currentObjectUrl = URL.createObjectURL(blob);
