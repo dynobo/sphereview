@@ -1,8 +1,7 @@
+use gtk4::gio;
 use log::error;
 use std::fs;
 use std::path::PathBuf;
-
-use crate::assets::Asset;
 
 pub const SUPPORTED_FILE_TYPES: &[(&str, &str)] = &[
     ("jpg", "image/jpeg"),
@@ -51,13 +50,16 @@ pub fn from_file(path: &PathBuf) -> ImageData {
 }
 
 pub fn from_demo() -> ImageData {
-    Asset::get("demo.webp")
-        .map(|asset| ImageData {
-            filename: "demo.webp".to_string(),
-            data: asset.data.to_vec(),
-            mime_type: "image/webp".to_string(),
-        })
-        .expect("demo.webp should always be available in assets")
+    gio::resources_lookup_data(
+        "/com/github/dynobo/sphereview/assets/demo.webp",
+        gio::ResourceLookupFlags::NONE,
+    )
+    .map(|bytes| ImageData {
+        filename: "demo.webp".to_string(),
+        data: bytes.to_vec(),
+        mime_type: "image/webp".to_string(),
+    })
+    .expect("demo.webp should always be available in GIO resources")
 }
 
 pub fn detect_mime_type<P: AsRef<std::path::Path>>(path: P) -> Option<&'static str> {

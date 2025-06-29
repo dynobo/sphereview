@@ -5,13 +5,12 @@ edition = "2024"
 build = "build.rs"
 
 [dependencies]
-gtk4 = { version = "0.9.7", features = ["v4_16", "blueprint"] }
+gtk4 = { version = "0.9.7", features = ["v4_14", "blueprint"] }
 glib = { version = "0.20", features = ["v2_80"] }
 gio = { version = "0.20", features = ["v2_80"] }
 libadwaita = { version = "0.7.2", features = ["v1_5"] }
 webkit6 = "0.4.0"
 base64 = "0.21.0"
-rust-embed = "8.2.0"
 log = "0.4"
 env_logger = "0.11"
 once_cell = "1.21.3"
