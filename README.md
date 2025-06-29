@@ -8,7 +8,7 @@
 
 <p align="center">
 <a href="https://github.com/dynobo/sphereview/actions/workflows/cicd.yaml" target="_blank"><img src="https://github.com/dynobo/sphereview/actions/workflows/cicd.yaml/badge.svg?branch=main" alt="CI/CD"></a>
-<a href="https://github.com/dynobo/sphereview/security/code-scanning/tools/CodeQL/status/"><img src="https://img.shields.io/github/actions/workflow/status/dynobo/sphereview/cicd.yaml?label=CodeQL&branch=main" alt="CodeQL"></a>
+<a href="https://github.com/dynobo/sphereview/actions/workflows/github-code-scanning/codeql"><img src="https://github.com/dynobo/sphereview/actions/workflows/github-code-scanning/codeql/badge.svg?branch=main" alt="CodeQL"></a>
 <a href="https://hanadigital.github.io/grev/?user=dynobo&repo=sphereview"><img src="https://img.shields.io/github/downloads/dynobo/sphereview/total?label=Github%20downloads&color=blue" alt="GitHub"></a>
 <a href="https://flathub.org/apps/details/com.github.dynobo.sphereview"><img src="https://img.shields.io/flathub/downloads/com.github.dynobo.sphereview?label=Flathub%20downloads&color=blue" alt="Flathub"></a>
 </p>
@@ -18,10 +18,7 @@ Links: <a href="https://github.com/dynobo/sphereview">Source Code</a> |
 <a href="https://github.com/dynobo/sphereview/releases">Releases</a> |
 <a href="https://github.com/dynobo/sphereview/blob/main/CHANGELOG">Changelog</a>
 </p>
-
-<p align="center">
-<img src="https://raw.githubusercontent.com/dynobo/sphereview/refs/heads/main/resources/assets/screencast.gif" alt="Screencast of SphereView in action" /> 
-</p>
+<br/>
 
 This my very first Rust Application. It stands on the shoulders of the fabulous JavaScript library [Photo Sphere Viewer](https://photo-sphere-viewer.js.org/) which deserves all credits for the image rendering and controls. SphereView just wraps it in a GTK interface to provide a desktop integration.
 
@@ -29,14 +26,21 @@ This my very first Rust Application. It stands on the shoulders of the fabulous 
 
 - Install FlatPak (_comming soon!_) \
   _or_
-- Download binary from [latest release](https://github.com/dynobo/sphereview/releases), `chmod +x` and run.
+- Download binary from [latest release](https://github.com/dynobo/sphereview/releases), `chmod +x` and run. (_comming soon!_)
 
 ## Features
 
-- Simplicity: Lean interface with minimal features
-- Privacy: 100% offline, no telemetry
-- Supported formats: JPEG, PNG, WEBP
-- Supported projection: Equirectanglar (e.g. used by Google Camera)
+- View panoramas and photospheres interactively
+- Lean interface with minimal features
+- 100% offline, no telemetry
+- Supports Equirectanglar projection (e.g. used by Google Camera)
+- Supports formats like JPEG, PNG, WEBP
+
+## Screencast
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/dynobo/sphereview/refs/heads/main/resources/assets/screencast.gif" alt="Screencast of SphereView in action" width="700"/> 
+</p>
 
 ## Development
 
