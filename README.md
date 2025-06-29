@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-**Links:** <a href="https://github.com/dynobo/sphereview">Source Code</a> |
+Links: <a href="https://github.com/dynobo/sphereview">Source Code</a> |
 <a href="https://github.com/dynobo/sphereview/releases">Releases</a> |
 <a href="https://github.com/dynobo/sphereview/blob/main/CHANGELOG">Changelog</a>
 </p>
