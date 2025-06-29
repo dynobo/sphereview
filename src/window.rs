@@ -1,14 +1,13 @@
 use base64::Engine;
 use glib::{self, subclass};
 use gtk4::{self, CompositeTemplate, gio, prelude::*};
-use libadwaita::subclass::prelude::*;
+use libadwaita::{self, prelude::*, subclass::prelude::*};
 use log::{debug, error};
 use once_cell::sync::Lazy;
 use std::cell::RefCell;
 use std::path::PathBuf;
 use webkit6::{self, WebView, prelude::*};
 
-use crate::assets::Asset;
 use crate::shortcuts_dialog::ShortcutsDialog;
 
 // Default initial directory for Open File dialog
@@ -36,9 +35,12 @@ mod imp {
 
         pub open_file_dialog: RefCell<Option<gtk4::FileDialog>>,
 
-        // Subsequent initial directory for Open File Dialog when the user opened a
-        // Panorama file
-        pub current_pano_path: RefCell<Option<PathBuf>>,
+        // Used to derive the initial directory for Open File Dialog when the user
+        // opened a Panorama file
+        pub active_panorama_file: RefCell<Option<PathBuf>>,
+
+        // If a file get passed as cli argument, this will be set via `app.rs`
+        pub cli_arg_panorama_file: RefCell<Option<PathBuf>>,
     }
 
     #[glib::object_subclass]
@@ -72,6 +74,7 @@ impl Window {
     pub fn new(app: &libadwaita::Application) -> Self {
         let obj: Self = glib::Object::new();
         obj.set_application(Some(app));
+        obj.set_icon_name(Some(crate::APP_ID));
         obj.setup_actions();
         obj.setup_webview();
         obj.setup_webview_drop_handler();
@@ -161,9 +164,12 @@ impl Window {
         // Index.html embeddes the PhotoSphereViewer.js and custom logic for loading
         // panorama images via JS. All CSS and JS is inlined and minified.
         // See ./resources/photospherviewer for the source files and build process.
-        let html = Asset::get("index.html")
-            .map(|content| String::from_utf8_lossy(content.data.as_ref()).into_owned())
-            .unwrap_or_else(|| "<h1>index.html not found in embed</h1>".to_string());
+        let html = gio::resources_lookup_data(
+            "/com/github/dynobo/sphereview/assets/index.html",
+            gio::ResourceLookupFlags::NONE,
+        )
+        .map(|bytes| String::from_utf8_lossy(&bytes).into_owned())
+        .unwrap_or_else(|_| "<h1>index.html not found in GIO resources</h1>".to_string());
 
         web_view.load_html(&html, Some("sphere://viewer"));
 
@@ -177,10 +183,19 @@ impl Window {
                 return;
             };
 
-            // When the webview is initially loaded, show the demo panorama
-            window
-                .show_panorama(None)
-                .unwrap_or_else(|e| error!("Failed to load demo panorama: {}", e));
+            // Load CLI panorama if provided, otherwise demo panorama will be shown
+            match window.imp().cli_arg_panorama_file.borrow().as_ref() {
+                Some(cli_file) => {
+                    if let Err(e) = window.show_panorama(Some(cli_file)) {
+                        error!("Failed to load panorama from CLI argument: {}", e);
+                    }
+                }
+                None => {
+                    if let Err(e) = window.show_panorama(None) {
+                        error!("Failed to load demo panorama: {}", e);
+                    }
+                }
+            }
         });
     }
 
@@ -278,20 +293,21 @@ impl Window {
 
     fn show_about_dialog(&self) {
         let window = self.upcast_ref::<gtk4::Window>();
-        let about = libadwaita::AboutWindow::builder()
+        let about = libadwaita::AboutDialog::builder()
             .application_name("SphereView")
             .license_type(gtk4::License::MitX11)
             .version(crate::APP_VERSION)
             .website("https://github.com/dynobo/sphereview")
             .issue_url("https://github.com/dynobo/sphereview")
-            .application_icon("image-x-generic")
+            .application_icon(crate::APP_ID)
             .developer_name("by dynobo")
-            .developers(["dynobo", "Creators of Photo Sphere Viewer"])
-            .comments("Viewer for spherical images and panoramas.\n\nStanding on the shoulders of the JavaScript library Photo Sphere Viewer.\n\nWritten in Rust and JavaScript.")
-            .transient_for(window)
-            .modal(true)
+            .comments(
+                "Image viewer for 360° equirectangular photospheres and panoramas.\n\n\
+                Standing on the shoulders of the JavaScript library Photo Sphere Viewer.\n\n\
+                Written in Rust and JavaScript.",
+            )
             .build();
-        about.present();
+        about.present(Some(window));
     }
 
     fn show_keyboard_shortcuts_dialog(&self) {
@@ -312,7 +328,7 @@ impl Window {
 
         let initial_folder = self
             .imp()
-            .current_pano_path
+            .active_panorama_file
             .borrow()
             .clone()
             .and_then(|path| path.parent().map(gio::File::for_path))
@@ -350,7 +366,7 @@ impl Window {
         let webview = imp.web_view.get();
         let title = imp.window_title.get();
 
-        *imp.current_pano_path.borrow_mut() = panorama_file.cloned();
+        *imp.active_panorama_file.borrow_mut() = panorama_file.cloned();
 
         let panorama = match panorama_file {
             Some(p) => crate::image::from_file(p),
@@ -383,5 +399,9 @@ impl Window {
         });
 
         Ok(())
+    }
+
+    pub fn set_initial_file(&self, path: Option<PathBuf>) {
+        *self.imp().cli_arg_panorama_file.borrow_mut() = path;
     }
 }
