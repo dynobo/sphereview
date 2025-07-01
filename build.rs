@@ -1,3 +1,4 @@
+use std::net::TcpStream;
 use std::process::Command;
 
 fn run_command(
@@ -29,13 +30,18 @@ fn main() {
     println!("cargo:rerun-if-changed=resources/io.github.dynobo.sphereview.gresource.xml");
     println!("cargo:rerun-if-changed=resources/io.github.dynobo.sphereview.gresource");
 
-    run_command(
-        "npm",
-        &["install"],
-        "resources/photosphereviewer",
-        "npm run install succeeded",
-        "Failed to npm install!",
-    );
+    if TcpStream::connect(("8.8.8.8", 53)).is_ok() {
+        run_command(
+            "npm",
+            &["install"],
+            "resources/photosphereviewer",
+            "npm run install succeeded",
+            "Failed to npm install!",
+        );
+    } else {
+        println!("cargo:warning=No internet connection detected. Skipping 'npm install'")
+    }
+
     run_command(
         "npm",
         &["run", "build"],
