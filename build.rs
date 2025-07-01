@@ -1,22 +1,16 @@
 use std::net::TcpStream;
 use std::process::Command;
 
-fn run_command(
-    command: &str,
-    args: &[&str],
-    dir: &str,
-    success_message: &str,
-    failure_message: &str,
-) {
+fn run_command(command: &str, args: &[&str], dir: &str) {
     let status = Command::new(command)
         .args(args)
         .current_dir(dir)
         .status()
-        .expect(failure_message);
+        .expect(&format!("Failed: {} {}", command, args.join(" ")));
     if !status.success() {
-        panic!("{}", failure_message);
+        panic!("Failed: {} {}", command, args.join(" "));
     } else {
-        println!("cargo:warning={}", success_message);
+        println!("cargo:warning=Succeeded: {} {}", command, args.join(" "));
     }
 }
 
@@ -31,24 +25,12 @@ fn main() {
     println!("cargo:rerun-if-changed=resources/io.github.dynobo.sphereview.gresource");
 
     if TcpStream::connect(("8.8.8.8", 53)).is_ok() {
-        run_command(
-            "npm",
-            &["install"],
-            "resources/photosphereviewer",
-            "npm run install succeeded",
-            "Failed to npm install!",
-        );
+        run_command("npm", &["install"], "resources/photosphereviewer");
     } else {
-        println!("cargo:warning=No internet connection detected. Skipping 'npm install'")
+        run_command("npm", &["ci", "--offline"], "resources/photosphereviewer");
     }
 
-    run_command(
-        "npm",
-        &["run", "build"],
-        "resources/photosphereviewer",
-        "npm run build succeeded",
-        "Failed to npm run build!",
-    );
+    run_command("npm", &["run", "build"], "resources/photosphereviewer");
 
     run_command(
         "glib-compile-resources",
@@ -58,7 +40,5 @@ fn main() {
             "--target=resources/io.github.dynobo.sphereview.gresource",
         ],
         ".",
-        "glib-compile-resources succeeded",
-        "Failed to compile gresource file!",
     );
 }
