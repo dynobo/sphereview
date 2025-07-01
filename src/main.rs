@@ -4,7 +4,7 @@ mod shortcuts_dialog;
 mod window;
 
 pub const APP_VERSION: &str = "0.1.0";
-pub const APP_ID: &str = "com.github.dynobo.sphereview";
+pub const APP_ID: &str = "io.github.dynobo.sphereview";
 
 use app::App;
 

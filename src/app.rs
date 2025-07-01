@@ -3,7 +3,7 @@ use gtk4::prelude::*;
 use libadwaita::Application;
 
 static GRESOURCE_BYTES: &[u8] =
-    include_bytes!("../resources/com.github.dynobo.sphereview.gresource");
+    include_bytes!("../resources/io.github.dynobo.sphereview.gresource");
 
 pub struct App {
     app: Application,

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/com/github/dynobo/sphereview">
-    <file preprocess="xml-stripblanks">icons/scalable/apps/com.github.dynobo.sphereview.svg</file>
+  <gresource prefix="/io/github/dynobo/sphereview">
+    <file preprocess="xml-stripblanks">icons/scalable/apps/io.github.dynobo.sphereview.svg</file>
     <file alias="assets/index.html">photosphereviewer/dist/index.html</file>
     <file>assets/demo.webp</file>
   </gresource>

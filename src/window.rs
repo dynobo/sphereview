@@ -165,7 +165,7 @@ impl Window {
         // panorama images via JS. All CSS and JS is inlined and minified.
         // See ./resources/photospherviewer for the source files and build process.
         let html = gio::resources_lookup_data(
-            "/com/github/dynobo/sphereview/assets/index.html",
+            "/io/github/dynobo/sphereview/assets/index.html",
             gio::ResourceLookupFlags::NONE,
         )
         .map(|bytes| String::from_utf8_lossy(&bytes).into_owned())
