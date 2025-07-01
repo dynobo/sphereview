@@ -26,8 +26,8 @@ fn main() {
     println!("cargo:rerun-if-changed=resources/photosphereviewer/public/demo.webp");
     println!("cargo:rerun-if-changed=resources/data/window.blp");
     println!("cargo:rerun-if-changed=resources/data/shortcuts.blp");
-    println!("cargo:rerun-if-changed=resources/com.github.dynobo.sphereview.gresource.xml");
-    println!("cargo:rerun-if-changed=resources/com.github.dynobo.sphereview.gresource");
+    println!("cargo:rerun-if-changed=resources/io.github.dynobo.sphereview.gresource.xml");
+    println!("cargo:rerun-if-changed=resources/io.github.dynobo.sphereview.gresource");
 
     run_command(
         "npm",
@@ -48,8 +48,8 @@ fn main() {
         "glib-compile-resources",
         &[
             "--sourcedir=resources",
-            "resources/com.github.dynobo.sphereview.gresource.xml",
-            "--target=resources/com.github.dynobo.sphereview.gresource",
+            "resources/io.github.dynobo.sphereview.gresource.xml",
+            "--target=resources/io.github.dynobo.sphereview.gresource",
         ],
         ".",
         "glib-compile-resources succeeded",

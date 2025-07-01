@@ -51,7 +51,7 @@ pub fn from_file(path: &PathBuf) -> ImageData {
 
 pub fn from_demo() -> ImageData {
     gio::resources_lookup_data(
-        "/com/github/dynobo/sphereview/assets/demo.webp",
+        "/io/github/dynobo/sphereview/assets/demo.webp",
         gio::ResourceLookupFlags::NONE,
     )
     .map(|bytes| ImageData {
