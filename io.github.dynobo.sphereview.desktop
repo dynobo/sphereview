@@ -8,3 +8,4 @@ Terminal=false
 Type=Application
 Categories=Graphics;Viewer;
 Keywords=Photosphere;Panorama;SphereView;
+MimeType=image/png;image/jpeg;image/jpg;image/webp;
