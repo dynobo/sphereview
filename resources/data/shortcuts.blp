@@ -193,6 +193,24 @@ template $ShortcutsDialog : Adw.Window {
 
           Label {
             halign: start;
+            label: "<tt>Space</tt>";
+            use-markup: true;
+            margin-end: 24;
+          }
+
+          Label {
+            halign: end;
+            hexpand: true;
+            label: "Toggle Autorotate";
+          }
+        }
+
+        Box {
+          orientation: horizontal;
+          spacing: 8;
+
+          Label {
+            halign: start;
             label: "<tt>PgUp</tt>  ╱  <tt>i</tt>";
             use-markup: true;
             margin-end: 24;

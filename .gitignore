@@ -1,4 +1,3 @@
 /target
-/testimages
-/reference
+**/*.gresource
 .vscode
