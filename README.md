@@ -24,7 +24,14 @@ This my very first Rust Application. It stands on the shoulders of the fabulous 
 
 ## Installation
 
-- Install from FlatHub (_comming soon!_) 
+You can install stable builds of SphereView from [Flathub](https://flathub.org) by using this command:
+
+```sh
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub io.github.dynobo.sphereview
+```
+
+<a href="https://flathub.org/apps/details/io.github.dynobo.sphereview"><img src="https://flathub.org/assets/badges/flathub-badge-en.png" width="160"/></a>
 
 ## Features
 
