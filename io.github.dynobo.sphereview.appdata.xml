@@ -23,11 +23,11 @@
   <url type="help">https://github.com/dynobo/sphereview/issues</url>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/dynobo/sphereview/refs/tags/v0.1.1/resources/assets/screenshot-1-hidpi.png</image>
+      <image>https://raw.githubusercontent.com/dynobo/sphereview/refs/tags/v0.1.2/resources/assets/screenshot-1-hidpi.png</image>
       <caption>The SphereView main window.</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/dynobo/sphereview/refs/tags/v0.1.1/resources/assets/screenshot-2-hidpi.png</image>
+      <image>https://raw.githubusercontent.com/dynobo/sphereview/refs/tags/v0.1.2/resources/assets/screenshot-2-hidpi.png</image>
       <caption>Shortcuts for control via keyboard.</caption>
     </screenshot>
   </screenshots>
@@ -36,6 +36,7 @@
     <color type="primary" scheme_preference="dark">#3d3d3f</color>
   </branding>
   <releases>
+    <release version="0.1.2" type="stable" date="2025-07-02" />
     <release version="0.1.1" type="stable" date="2025-07-01" />
   </releases>
   <launchable type="desktop-id">io.github.dynobo.sphereview.desktop</launchable>
