@@ -9,8 +9,8 @@
 <p align="center">
 <a href="https://github.com/dynobo/sphereview/actions/workflows/cicd.yaml" target="_blank"><img src="https://github.com/dynobo/sphereview/actions/workflows/cicd.yaml/badge.svg?branch=main" alt="CI/CD"></a>
 <a href="https://github.com/dynobo/sphereview/actions/workflows/github-code-scanning/codeql"><img src="https://github.com/dynobo/sphereview/actions/workflows/github-code-scanning/codeql/badge.svg?branch=main" alt="CodeQL"></a>
-<a href="https://hanadigital.github.io/grev/?user=dynobo&repo=sphereview"><img src="https://img.shields.io/github/downloads/dynobo/sphereview/total?label=Github%20downloads&color=blue" alt="GitHub"></a>
-<a href="https://flathub.org/apps/details/io.github.dynobo.sphereview"><img src="https://img.shields.io/flathub/downloads/io.github.dynobo.sphereview?label=Flathub%20downloads&color=blue" alt="Flathub"></a>
+<a href="https://hanadigital.github.io/grev/?user=dynobo&repo=sphereview"><img src="https://img.shields.io/github/downloads/dynobo/sphereview/total?label=Github%20downloads&color=blue&cacheSeconds=600" alt="GitHub"></a>
+<a href="https://flathub.org/apps/details/io.github.dynobo.sphereview"><img src="https://img.shields.io/flathub/downloads/io.github.dynobo.sphereview?label=Flathub%20downloads&color=blue&cacheSeconds=600" alt="Flathub"></a>
 </p>
 
 <p align="center">
