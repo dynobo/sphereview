@@ -2,7 +2,7 @@
 Name=SphereView
 GenericName=360° images viewer
 Comment=Viewer for equirectangular photospheres and panoramas.
-Exec=sphereview
+Exec=sphereview %u
 Icon=io.github.dynobo.sphereview
 Terminal=false
 Type=Application
