@@ -5,18 +5,18 @@
   <project_license>MIT</project_license>
   <name>SphereView</name>
   <developer_name>dynobo</developer_name>
-  <summary>Display photospheres and panoramas</summary>
+  <summary>View 360 degree photospheres & panoramas</summary>
   <description>
     <p>Image viewer for 360° equirectangular images like photospheres and panoramas.</p>
     <p>Some notable features:</p>
     <ul>
       <li>View panoramas and photospheres interactively</li>
       <li>Lean interface with minimal features</li>
-      <li>100% offline, no telemetry</li>
-      <li>Supports Equirectanglar projection (e.g. used by Google Camera)</li>
+      <li>Supports equirectanglar projection (e.g. used by Google Camera)</li>
       <li>Supports formats like JPEG, PNG, WEBP</li>
+      <li>100% offline, no telemetry</li>
     </ul>
-    <p>Tags: Photosphere, Panorama, 369, Equirectangular</p>
+    <p>Tags: Photosphere, Panorama, 360, Equirectangular</p>
   </description>
   <url type="homepage">https://github.com/dynobo/sphereview</url>
   <url type="bugtracker">https://github.com/dynobo/sphereview/issues</url>
