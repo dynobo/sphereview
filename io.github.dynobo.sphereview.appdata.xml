@@ -5,9 +5,9 @@
   <project_license>MIT</project_license>
   <name>SphereView</name>
   <developer_name>dynobo</developer_name>
-  <summary>View 360 degree photospheres & panoramas</summary>
+  <summary>View 360&deg; photospheres &amp; panoramas</summary>
   <description>
-    <p>Image viewer for 360° equirectangular images like photospheres and panoramas.</p>
+    <p>Image viewer for 360&deg; equirectangular images like photospheres and panoramas.</p>
     <p>Some notable features:</p>
     <ul>
       <li>View panoramas and photospheres interactively</li>
