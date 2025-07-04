@@ -13,7 +13,7 @@
       <li>View panoramas and photospheres interactively</li>
       <li>Lean interface with minimal features</li>
       <li>Supports equirectanglar projection (e.g. used by Google Camera)</li>
-      <li>Supports formats like JPEG, PNG, WEBP</li>
+      <li>Supports formats like JPEG, PNG, WebP</li>
       <li>100% offline, no telemetry</li>
     </ul>
     <p>Tags: Photosphere, Panorama, 360, Equirectangular</p>
