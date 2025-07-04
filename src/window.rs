@@ -148,11 +148,17 @@ impl Window {
             let Some(window) = window_weak.upgrade() else {
                 return;
             };
-            webview.evaluate_javascript("window.viewer.zoomIn(20)", None, None, None::<&gio::Cancellable>, |result| {
-                if let Err(e) = result {
-                    error!("Failed to evaluate JavaScript: {}", e);
-                }
-            });
+            webview.evaluate_javascript(
+                "window.viewer.zoomIn(20)",
+                None,
+                None,
+                None::<&gio::Cancellable>,
+                |result| {
+                    if let Err(e) = result {
+                        error!("Failed to evaluate JavaScript: {}", e);
+                    }
+                },
+            );
         });
         window.add_action(&zoom_action);
 
@@ -164,11 +170,17 @@ impl Window {
             let Some(window) = window_weak.upgrade() else {
                 return;
             };
-            webview.evaluate_javascript("window.viewer.zoomOut(20)", None, None, None::<&gio::Cancellable>, |result| {
-                if let Err(e) = result {
-                    error!("Failed to evaluate JavaScript: {}", e);
-                }
-            });
+            webview.evaluate_javascript(
+                "window.viewer.zoomOut(20)",
+                None,
+                None,
+                None::<&gio::Cancellable>,
+                |result| {
+                    if let Err(e) = result {
+                        error!("Failed to evaluate JavaScript: {}", e);
+                    }
+                },
+            );
         });
         window.add_action(&zoom_action);
     }
