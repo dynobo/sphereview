@@ -139,6 +139,38 @@ impl Window {
             }
         });
         window.add_action(&fullscreen_action);
+
+        // Zoom in
+        let zoom_action = gtk4::gio::SimpleAction::new("zoom-in", None);
+        let window_weak = self.downgrade();
+        let webview = self.imp().web_view.get();
+        zoom_action.connect_activate(move |_, _| {
+            let Some(window) = window_weak.upgrade() else {
+                return;
+            };
+            webview.evaluate_javascript("window.viewer.zoomIn(20)", None, None, None::<&gio::Cancellable>, |result| {
+                if let Err(e) = result {
+                    error!("Failed to evaluate JavaScript: {}", e);
+                }
+            });
+        });
+        window.add_action(&zoom_action);
+
+        // Zoom out
+        let zoom_action = gtk4::gio::SimpleAction::new("zoom-out", None);
+        let window_weak = self.downgrade();
+        let webview = self.imp().web_view.get();
+        zoom_action.connect_activate(move |_, _| {
+            let Some(window) = window_weak.upgrade() else {
+                return;
+            };
+            webview.evaluate_javascript("window.viewer.zoomOut(20)", None, None, None::<&gio::Cancellable>, |result| {
+                if let Err(e) = result {
+                    error!("Failed to evaluate JavaScript: {}", e);
+                }
+            });
+        });
+        window.add_action(&zoom_action);
     }
 
     fn setup_webview(&self) {
