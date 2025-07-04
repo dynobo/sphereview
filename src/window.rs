@@ -171,6 +171,7 @@ impl Window {
         .map(|bytes| String::from_utf8_lossy(&bytes).into_owned())
         .unwrap_or_else(|_| "<h1>index.html not found in GIO resources</h1>".to_string());
 
+        web_view.connect_context_menu(move |_, _, _| true);
         web_view.load_html(&html, Some("sphere://viewer"));
 
         let window_weak = self.downgrade();
