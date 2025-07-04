@@ -2,6 +2,11 @@
 
 # Changelog
 
+## Upcoming
+
+- Disable webkit context menu ([#26](https://github.com/dynobo/sphereview/pull/26) - [vanillajonathan](https://github.com/vanillajonathan) 🚀 ).
+- Slightly reword Flathub description and application menu.
+
 ## v0.1.2 (2025-07-02)
 
 - Fix opening files of supported MIME types.  
