@@ -234,7 +234,7 @@ impl Window {
 
         let menu = gio::Menu::new();
         menu.append(Some("Keyboard Shortcuts"), Some("win.keyboard-shortcuts"));
-        menu.append(Some("About"), Some("win.about"));
+        menu.append(Some("About SphereView"), Some("win.about"));
 
         let popover_menu = gtk4::PopoverMenu::from_model(Some(&menu));
 
