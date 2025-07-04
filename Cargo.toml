@@ -14,3 +14,8 @@ base64 = "0.21.0"
 log = "0.4"
 env_logger = "0.11"
 once_cell = "1.21.3"
+
+[dev-dependencies]
+toml = "0.8"
+roxmltree = "0.19"
+regex = "1.0"
