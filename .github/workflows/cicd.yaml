@@ -69,9 +69,7 @@ jobs:
           prerelease: true
           tag_name: internal
           files: |
-            sphereview-linux-x64
-            sphereview-linux-arm64
-          fail_on_unmatched_files: false
+            sphereview-linux-*
 
       - name: Release
         uses: softprops/action-gh-release@v2
