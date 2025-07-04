@@ -61,7 +61,7 @@ jobs:
 
       - name: Internal release
         uses: softprops/action-gh-release@v2
-        if: github.repository_owner == 'dynobo'
+        if: github.event.pull_request.head.repo.fork == false
         with:
           name: Internal
           body: "Only for internal tests. Should not be published. [${{ env.NOW }}]"
@@ -77,7 +77,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: |
           startsWith(github.ref, 'refs/tags/v')
-          && github.repository_owner == 'dynobo'
+          && github.event.pull_request.head.repo.fork == false
         with:
           body: "See [changelog](https://github.com/dynobo/sphereview/blob/main/CHANGELOG) for details."
           draft: true
