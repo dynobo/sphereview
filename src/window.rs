@@ -302,6 +302,18 @@ impl Window {
             .issue_url("https://github.com/dynobo/sphereview")
             .application_icon(crate::APP_ID)
             .developer_name("by dynobo")
+            .debug_info(format!(
+                "GTK {}.{}.{}\nAdwaita {}.{}.{}\WebKitGTK: {}.{}.{}",
+                gtk4::major_version(),
+                gtk4::minor_version(),
+                gtk4::micro_version(),
+                libadwaita::major_version(),
+                libadwaita::minor_version(),
+                libadwaita::micro_version(),
+                webkit6::functions::major_version(),
+                webkit6::functions::minor_version(),
+                webkit6::functions::micro_version()
+            ))
             .comments(
                 "Image viewer for 360° equirectangular photospheres and panoramas.\n\n\
                 Standing on the shoulders of the JavaScript library Photo Sphere Viewer.\n\n\
