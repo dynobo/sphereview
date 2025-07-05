@@ -303,7 +303,7 @@ impl Window {
             .application_icon(crate::APP_ID)
             .developer_name("by dynobo")
             .debug_info(format!(
-                "GTK {}.{}.{}\nAdwaita {}.{}.{}\WebKitGTK: {}.{}.{}",
+                "GTK {}.{}.{}\nAdwaita {}.{}.{}\nWebKitGTK: {}.{}.{}",
                 gtk4::major_version(),
                 gtk4::minor_version(),
                 gtk4::micro_version(),
