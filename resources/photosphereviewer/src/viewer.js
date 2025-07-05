@@ -35,6 +35,8 @@ const viewer = new Viewer({
     ],
 });
 
+window.viewer = viewer;
+
 // Keep reference to blob url for memory management
 let currentObjectUrl = null;
 
