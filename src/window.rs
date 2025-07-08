@@ -1,6 +1,6 @@
 use base64::Engine;
 use glib::{self, subclass};
-use gtk4::{self, CompositeTemplate, gio, prelude::*};
+use gtk4::{self, CompositeTemplate, gdk, gio, prelude::*};
 use libadwaita::{self, prelude::*, subclass::prelude::*};
 use log::{debug, error};
 use once_cell::sync::Lazy;
@@ -51,6 +51,7 @@ mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
+            klass.bind_template_instance_callbacks();
         }
 
         fn instance_init(obj: &subclass::InitializingObject<Self>) {
@@ -70,6 +71,7 @@ glib::wrapper! {
         @extends gtk4::Widget, gtk4::Window, gtk4::ApplicationWindow, libadwaita::ApplicationWindow;
 }
 
+#[gtk4::template_callbacks]
 impl Window {
     pub fn new(app: &libadwaita::Application) -> Self {
         let obj: Self = glib::Object::new();
@@ -139,42 +141,49 @@ impl Window {
             }
         });
         window.add_action(&fullscreen_action);
+    }
 
-        // Zoom in
-        let zoom_action = gtk4::gio::SimpleAction::new("zoom-in", None);
-        let webview = self.imp().web_view.get();
-        zoom_action.connect_activate(move |_, _| {
-            webview.evaluate_javascript(
-                "window.viewer.zoomIn(20)",
-                None,
-                None,
-                None::<&gio::Cancellable>,
-                |result| {
-                    if let Err(e) = result {
-                        error!("Failed to evaluate JavaScript: {}", e);
-                    }
-                },
-            );
-        });
-        window.add_action(&zoom_action);
+    fn evaluate_javascript(webview: &WebView, javascript: &str) {
+        webview.evaluate_javascript(
+            javascript,
+            None,
+            None,
+            None::<&gio::Cancellable>,
+            |result| {
+                if let Err(e) = result {
+                    error!("Failed to evaluate JavaScript: {}", e);
+                }
+            },
+        );
+    }
 
-        // Zoom out
-        let zoom_action = gtk4::gio::SimpleAction::new("zoom-out", None);
+    fn key_down(&self, key: &str) {
         let webview = self.imp().web_view.get();
-        zoom_action.connect_activate(move |_, _| {
-            webview.evaluate_javascript(
-                "window.viewer.zoomOut(20)",
-                None,
-                None,
-                None::<&gio::Cancellable>,
-                |result| {
-                    if let Err(e) = result {
-                        error!("Failed to evaluate JavaScript: {}", e);
-                    }
-                },
-            );
-        });
-        window.add_action(&zoom_action);
+        Self::evaluate_javascript(
+            &webview,
+            &format!("window.dispatchEvent(new KeyboardEvent('keydown', {{ key: '{key}' }}));"),
+        );
+    }
+
+    #[template_callback]
+    pub fn on_key_pressed(
+        &self,
+        key: gdk::Key,
+        _: u32,
+        _modifier: gdk::ModifierType,
+        _: &gtk4::EventControllerKey,
+    ) -> glib::Propagation {
+        match key {
+            gdk::Key::k => self.key_down("ArrowUp"),
+            gdk::Key::j => self.key_down("ArrowDown"),
+            gdk::Key::l => self.key_down("ArrowRight"),
+            gdk::Key::h => self.key_down("ArrowLeft"),
+            gdk::Key::i | gdk::Key::KP_Add => self.key_down("PageUp"),
+            gdk::Key::o | gdk::Key::KP_Subtract => self.key_down("PageDown"),
+            _ => {}
+        };
+
+        glib::Propagation::Proceed
     }
 
     fn setup_webview(&self) {
@@ -338,6 +347,18 @@ impl Window {
             .issue_url("https://github.com/dynobo/sphereview")
             .application_icon(crate::APP_ID)
             .developer_name("by dynobo")
+            .debug_info(format!(
+                "GTK {}.{}.{}\nAdwaita {}.{}.{}\nWebKitGTK: {}.{}.{}",
+                gtk4::major_version(),
+                gtk4::minor_version(),
+                gtk4::micro_version(),
+                libadwaita::major_version(),
+                libadwaita::minor_version(),
+                libadwaita::micro_version(),
+                webkit6::functions::major_version(),
+                webkit6::functions::minor_version(),
+                webkit6::functions::micro_version()
+            ))
             .comments(
                 "Image viewer for 360° equirectangular photospheres and panoramas.\n\n\
                 Standing on the shoulders of the JavaScript library Photo Sphere Viewer.\n\n\

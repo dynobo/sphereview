@@ -10,22 +10,6 @@ const viewer = new Viewer({
     panorama: window.location.pathname.endsWith("index.html") ? "demo.webp" : "",
     caption: "",
     navbar: ["autorotate", "zoom", "move", "caption", "fullscreen"],
-    keyboardActions: {
-        // Note keys which might need modifiers (e.g. '+') do not work reliably!
-        'ArrowUp': 'ROTATE_UP',
-        'ArrowDown': 'ROTATE_DOWN',
-        'ArrowRight': 'ROTATE_RIGHT',
-        'ArrowLeft': 'ROTATE_LEFT',
-        'PageUp': 'ZOOM_IN',
-        'PageDown': 'ZOOM_OUT',
-        // Vim like
-        'k': 'ROTATE_UP',
-        'j': 'ROTATE_DOWN',
-        'l': 'ROTATE_RIGHT',
-        'h': 'ROTATE_LEFT',
-        'i': 'ZOOM_IN',
-        'o': 'ZOOM_OUT',
-    },
     plugins: [
         [AutorotatePlugin, {
             autostartDelay: null,

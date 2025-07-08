@@ -7,6 +7,10 @@ template $Window : Adw.ApplicationWindow {
   default-width: 800;
   default-height: 600;
 
+  EventControllerKey {
+    key-pressed => $on_key_pressed() swapped;
+  }
+
   Box {
     orientation: vertical;
 
