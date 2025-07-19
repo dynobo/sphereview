@@ -73,7 +73,16 @@ npm install
 cd ../..
 
 # Install rust dependencies and run application
-cargo run 
+cargo run
+```
+
+For debugging the viewer logic in the browser:
+
+```sh
+cp resources/assets/demo.webp resources/photosphereviewer/dist
+cd resources/photosphereviewer
+python -m http.server --bind 127.0.0.1 8000
+xdg-open http://127.0.0.1:8000/index.html  # /index.html is important! 
 ```
 
 ## Similar projects
