@@ -4,6 +4,9 @@
 
 ## Upcoming
 
+- Add keyboard shortcuts `+` and `-` for zooming in and out.
+- Improve keyboard navigation by maintaining focus on the viewer.
+- Remove distracting blue focus outlines from buttons at the bottom.
 - Disable unnecessary webkit context menu ([#26](https://github.com/dynobo/sphereview/pull/26) - [vanillajonathan](https://github.com/vanillajonathan) 🚀 ).
 - Add debug info to about dialog ([#29](https://github.com/dynobo/sphereview/pull/29) - [vanillajonathan](https://github.com/vanillajonathan) 🚀 ).
 - Slightly reword Flathub description and application menu.
