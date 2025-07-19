@@ -16,6 +16,7 @@ template $Window : Adw.ApplicationWindow {
         icon-name: "document-open-symbolic";
         tooltip-text: "Open File";
         action-name: "win.open-file";
+        can-focus: false;
       }
 
       title-widget: Label window_title {
@@ -27,6 +28,7 @@ template $Window : Adw.ApplicationWindow {
       MenuButton menu_button {
         icon-name: "open-menu-symbolic";
         tooltip-text: "Main Menu";
+        can-focus: false;
       }
     }
 
