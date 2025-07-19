@@ -174,12 +174,13 @@ impl Window {
         _: &gtk4::EventControllerKey,
     ) -> glib::Propagation {
         match key {
-            gdk::Key::k => self.key_down("ArrowUp"),
-            gdk::Key::j => self.key_down("ArrowDown"),
-            gdk::Key::l => self.key_down("ArrowRight"),
-            gdk::Key::h => self.key_down("ArrowLeft"),
+            gdk::Key::uparrow | gdk::Key::k => self.key_down("ArrowUp"),
+            gdk::Key::downarrow | gdk::Key::j => self.key_down("ArrowDown"),
+            gdk::Key::rightarrow | gdk::Key::l => self.key_down("ArrowRight"),
+            gdk::Key::leftarrow | gdk::Key::h => self.key_down("ArrowLeft"),
             gdk::Key::i | gdk::Key::KP_Add => self.key_down("PageUp"),
             gdk::Key::o | gdk::Key::KP_Subtract => self.key_down("PageDown"),
+            gdk::Key::space => self.key_down("Space"),
             _ => {}
         };
 
