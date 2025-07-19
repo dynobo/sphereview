@@ -35,6 +35,19 @@ const viewer = new Viewer({
     ],
 });
 
+// Remap +/- for zooming, as work around for keyboardActions not working properly 
+// for keys which need modifiers
+document.addEventListener('keydown', function (event) {
+    if (event.key === '+') {
+        event.preventDefault();
+        window.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageUp' }));
+    }
+    if (event.key === '-') {
+        event.preventDefault();
+        window.dispatchEvent(new KeyboardEvent('keydown', { key: 'PageDown' }));
+    }
+}, { capture: true });
+
 // Keep reference to blob url for memory management
 let currentObjectUrl = null;
 
