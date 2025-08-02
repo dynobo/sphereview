@@ -17,228 +17,69 @@ template $ShortcutsDialog : Adw.Window {
       };
     }
 
-    Box {
-      orientation: horizontal;
-      halign: center;
+    ShortcutsSection {
+      section-name: "shortcuts";
 
-      Box {
-        orientation: vertical;
-        margin-top: 16;
-        margin-bottom: 32;
-        margin-start: 24;
-        margin-end: 24;
-        spacing: 12;
+      ShortcutsGroup {
+        title: "General";
 
-        Label {
-          halign: start;
-          label: "<b>General</b>";
-          use-markup: true;
-          margin-top: 12;
+        ShortcutsShortcut {
+          accelerator: "<Ctrl>o";
+          title: "Open File";
         }
 
-        Box {
-          orientation: horizontal;
-          spacing: 8;
-
-          Label {
-            halign: start;
-            label: "<tt>Ctrl</tt> + <tt>o</tt>";
-            use-markup: true;
-            margin-end: 24;
-          }
-
-          Label {
-            halign: end;
-            hexpand: true;
-            label: "Open File";
-          }
+        ShortcutsShortcut {
+          accelerator: "F11";
+          title: "Toggle Fullscreen";
         }
 
-        Box {
-          orientation: horizontal;
-          spacing: 8;
-
-          Label {
-            halign: start;
-            label: "<tt>F11</tt>";
-            use-markup: true;
-            margin-end: 24;
-          }
-
-          Label {
-            halign: end;
-            hexpand: true;
-            label: "Toggle Fullscreen";
-          }
+        ShortcutsShortcut {
+          accelerator: "<Ctrl>question";
+          title: "View Shortcuts";
         }
 
-        Box {
-          orientation: horizontal;
-          spacing: 8;
+        ShortcutsShortcut {
+          accelerator: "<Ctrl>q";
+          title: "Quit";
+        }
+      }
 
-          Label {
-            halign: start;
-            label: "<tt>Ctrl</tt> + <tt>?</tt>";
-            use-markup: true;
-            margin-end: 24;
-          }
+      ShortcutsGroup {
+        title: "Viewer";
 
-          Label {
-            halign: end;
-            hexpand: true;
-            label: "View Shortcuts";
-          }
+        ShortcutsShortcut {
+          accelerator: "Up k";
+          title: "Rotate Up";
         }
 
-        Box {
-          orientation: horizontal;
-          spacing: 8;
-
-          Label {
-            halign: start;
-            label: "<tt>Ctrl</tt> + <tt>q</tt>";
-            use-markup: true;
-            margin-end: 24;
-          }
-
-          Label {
-            halign: end;
-            hexpand: true;
-            label: "Quit";
-          }
+        ShortcutsShortcut {
+          accelerator: "Down j";
+          title: "Rotate Down";
         }
 
-        Label {
-          halign: start;
-          label: "<b>Viewer</b>";
-          use-markup: true;
-          margin-top: 12;
+        ShortcutsShortcut {
+          accelerator: "Left l";
+          title: "Rotate Right";
         }
 
-        Box {
-          orientation: horizontal;
-          spacing: 8;
-
-          Label {
-            halign: start;
-            label: "<tt>⬆</tt>  ╱  <tt>k</tt>";
-            use-markup: true;
-            margin-end: 24;
-          }
-
-          Label {
-            halign: end;
-            hexpand: true;
-            label: "Rotate Up";
-          }
+        ShortcutsShortcut {
+          accelerator: "Right h";
+          title: "Rotate Left";
         }
 
-        Box {
-          orientation: horizontal;
-          spacing: 8;
-
-          Label {
-            halign: start;
-            label: "<tt>⬇</tt>  ╱  <tt>j</tt>";
-            use-markup: true;
-            margin-end: 24;
-          }
-
-          Label {
-            halign: end;
-            hexpand: true;
-            label: "Rotate Down";
-          }
+        ShortcutsShortcut {
+          accelerator: "space";
+          title: "Toggle Autorotate";
         }
 
-        Box {
-          orientation: horizontal;
-          spacing: 8;
-
-          Label {
-            halign: start;
-            label: "<tt>➡</tt>  ╱  <tt>l</tt>";
-            use-markup: true;
-            margin-end: 24;
-          }
-
-          Label {
-            halign: end;
-            hexpand: true;
-            label: "Rotate Right";
-          }
+        ShortcutsShortcut {
+          accelerator: "Page_Up i plus";
+          title: "Zoom In";
         }
 
-        Box {
-          orientation: horizontal;
-          spacing: 8;
-
-          Label {
-            halign: start;
-            label: "<tt>⬅</tt>  ╱  <tt>h</tt>";
-            use-markup: true;
-            margin-end: 24;
-          }
-
-          Label {
-            halign: end;
-            hexpand: true;
-            label: "Rotate Left";
-          }
-        }
-
-        Box {
-          orientation: horizontal;
-          spacing: 8;
-
-          Label {
-            halign: start;
-            label: "<tt>Space</tt>";
-            use-markup: true;
-            margin-end: 24;
-          }
-
-          Label {
-            halign: end;
-            hexpand: true;
-            label: "Toggle Autorotate";
-          }
-        }
-
-        Box {
-          orientation: horizontal;
-          spacing: 8;
-
-          Label {
-            halign: start;
-            label: "<tt>+</tt> / <tt>PgUp</tt>  ╱  <tt>i</tt>";
-            use-markup: true;
-            margin-end: 24;
-          }
-
-          Label {
-            halign: end;
-            hexpand: true;
-            label: "Zoom In";
-          }
-        }
-
-        Box {
-          orientation: horizontal;
-          spacing: 8;
-
-          Label {
-            halign: start;
-            label: "<tt>-</tt> / <tt>PgDn</tt>  ╱  <tt>o</tt>";
-            use-markup: true;
-            margin-end: 24;
-          }
-
-          Label {
-            halign: end;
-            hexpand: true;
-            label: "Zoom Out";
-          }
+        ShortcutsShortcut {
+          accelerator: "Page_Down o minus";
+          title: "Zoom Out";
         }
       }
     }
