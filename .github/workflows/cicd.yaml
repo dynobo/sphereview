@@ -26,16 +26,35 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-24.04, ubuntu-24.04-arm]
+    container:
+      image: fedora:43
     steps:
       - name: Install system dependencies
         run: |
-          sudo apt update
-          sudo apt install -y \
-            libgtk-4-dev \
-            libadwaita-1-dev \
-            libglib2.0-dev \
-            libwebkitgtk-6.0-dev \
-            blueprint-compiler
+          dnf update -y
+          dnf install -y \
+            gtk4-devel \
+            libadwaita-devel \
+            glib2-devel \
+            webkitgtk6.0-devel \
+            blueprint-compiler \
+            rust \
+            cargo \
+            rustfmt \
+            git \
+            gcc \
+            gcc-c++ \
+            pkgconf-pkg-config \
+            nodejs24 \
+            nodejs24-npm
+          # Create symlinks for versioned Node.js binaries
+          ln -sf /usr/bin/node-24 /usr/bin/node
+          ln -sf /usr/bin/npm-24 /usr/bin/npm
+            
+      - name: Verify versions
+        run: |
+          pkg-config --modversion gtk4
+          npm --version
             
       - uses: actions/checkout@v4.2.2
 
