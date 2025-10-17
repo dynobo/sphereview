@@ -6,7 +6,7 @@ fn run_command(command: &str, args: &[&str], dir: &str) {
         .args(args)
         .current_dir(dir)
         .status()
-        .expect(&format!("Failed: {} {}", command, args.join(" ")));
+        .unwrap_or_else(|_| panic!("Failed: {} {}", command, args.join(" ")));
     if !status.success() {
         panic!("Failed: {} {}", command, args.join(" "));
     } else {

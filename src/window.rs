@@ -12,8 +12,7 @@ use crate::shortcuts_dialog::ShortcutsDialog;
 
 // Default initial directory for Open File dialog
 pub static PICTURES_DIR: Lazy<PathBuf> = Lazy::new(|| {
-    glib::user_special_dir(glib::UserDirectory::Pictures)
-        .unwrap_or_else(|| PathBuf::from(glib::home_dir()))
+    glib::user_special_dir(glib::UserDirectory::Pictures).unwrap_or_else(glib::home_dir)
 });
 
 mod imp {
@@ -67,7 +66,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
-        @extends gtk4::Widget, gtk4::Window, gtk4::ApplicationWindow, libadwaita::ApplicationWindow;
+        @extends gtk4::Widget, gtk4::Window, gtk4::ApplicationWindow, libadwaita::ApplicationWindow,
+        @implements gtk4::Accessible, gtk4::Buildable, gtk4::ConstraintTarget, gtk4::Native, gtk4::Root, gtk4::ShortcutManager, gio::ActionGroup, gio::ActionMap;
 }
 
 impl Window {
@@ -221,7 +221,7 @@ impl Window {
                 .get::<gtk4::gio::File>()
                 .ok()
                 .and_then(|file| file.path())
-                .map_or(false, |path| {
+                .is_some_and(|path| {
                     debug!("File dropped: {:?}", path);
                     window.show_panorama(Some(&path)).is_ok()
                 })
@@ -250,7 +250,7 @@ impl Window {
             let Some(window) = window_weak.upgrade() else {
                 return;
             };
-            let _ = window.activate_action("open-file", None);
+            let _ = gtk4::prelude::WidgetExt::activate_action(&window, "open-file", None);
         });
     }
 
