@@ -38,7 +38,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct ShortcutsDialog(ObjectSubclass<imp::ShortcutsDialog>)
-        @extends gtk4::Widget, gtk4::Window, libadwaita::Window;
+        @extends gtk4::Widget, gtk4::Window, libadwaita::Window,
+        @implements gtk4::Accessible, gtk4::Buildable, gtk4::ConstraintTarget, gtk4::Native, gtk4::Root, gtk4::ShortcutManager;
 }
 
 impl ShortcutsDialog {
