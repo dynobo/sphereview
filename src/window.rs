@@ -8,7 +8,7 @@ use std::cell::RefCell;
 use std::path::PathBuf;
 use webkit6::{self, WebView, prelude::*};
 
-use crate::shortcuts_dialog::ShortcutsDialog;
+use crate::shortcuts_dialog::create_shortcuts_dialog;
 
 // Default initial directory for Open File dialog
 pub static PICTURES_DIR: Lazy<PathBuf> = Lazy::new(|| {
@@ -325,8 +325,8 @@ impl Window {
 
     fn show_keyboard_shortcuts_dialog(&self) {
         let window = self.upcast_ref::<gtk4::Window>();
-        let shortcuts_window = ShortcutsDialog::new(window);
-        shortcuts_window.present();
+        let shortcuts_dialog = create_shortcuts_dialog();
+        shortcuts_dialog.present(Some(window));
     }
 
     fn show_file_chooser_dialog(&self) {

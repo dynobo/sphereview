@@ -1,52 +1,37 @@
-use glib::{self, subclass};
-use gtk4::gdk::ModifierType;
-use gtk4::{self, CompositeTemplate, prelude::*, subclass::prelude::*};
-use libadwaita::{self, subclass::prelude::*};
+pub fn create_shortcuts_dialog() -> libadwaita::ShortcutsDialog {
+    let dialog = libadwaita::ShortcutsDialog::new();
 
-mod imp {
-    use super::*;
+    let general_section = libadwaita::ShortcutsSection::new(Some("General"));
 
-    #[derive(CompositeTemplate, Default)]
-    #[template(file = "resources/data/shortcuts.blp")]
-    pub struct ShortcutsDialog {}
+    general_section.add(libadwaita::ShortcutsItem::from_action(
+        "Open File",
+        "win.open-file",
+    ));
+    general_section.add(libadwaita::ShortcutsItem::from_action(
+        "Toggle Fullscreen",
+        "win.toggle-fullscreen",
+    ));
+    general_section.add(libadwaita::ShortcutsItem::from_action(
+        "View Shortcuts",
+        "win.keyboard-shortcuts",
+    ));
+    general_section.add(libadwaita::ShortcutsItem::from_action("Quit", "app.quit"));
 
-    #[glib::object_subclass]
-    impl ObjectSubclass for ShortcutsDialog {
-        const NAME: &'static str = "ShortcutsDialog";
-        type Type = super::ShortcutsDialog;
-        type ParentType = libadwaita::Window;
+    dialog.add(general_section);
 
-        fn class_init(klass: &mut Self::Class) {
-            klass.bind_template();
-            klass.add_binding_action(
-                gtk4::gdk::Key::Escape,
-                ModifierType::empty(),
-                "window.close",
-            );
-        }
+    let viewer_section = libadwaita::ShortcutsSection::new(Some("Viewer"));
+    viewer_section.add(libadwaita::ShortcutsItem::new("Rotate Up", "Up k"));
+    viewer_section.add(libadwaita::ShortcutsItem::new("Rotate Down", "Down j"));
+    viewer_section.add(libadwaita::ShortcutsItem::new("Rotate Right", "Right l"));
+    viewer_section.add(libadwaita::ShortcutsItem::new("Rotate Left", "Left h"));
+    viewer_section.add(libadwaita::ShortcutsItem::new("Toggle Autorotate", "space"));
+    viewer_section.add(libadwaita::ShortcutsItem::new("Zoom In", "plus Page_Up i"));
+    viewer_section.add(libadwaita::ShortcutsItem::new(
+        "Zoom Out",
+        "minus Page_Down o",
+    ));
 
-        fn instance_init(obj: &subclass::InitializingObject<Self>) {
-            obj.init_template();
-        }
-    }
+    dialog.add(viewer_section);
 
-    impl ObjectImpl for ShortcutsDialog {}
-    impl WidgetImpl for ShortcutsDialog {}
-    impl WindowImpl for ShortcutsDialog {}
-    impl AdwWindowImpl for ShortcutsDialog {}
-}
-
-glib::wrapper! {
-    pub struct ShortcutsDialog(ObjectSubclass<imp::ShortcutsDialog>)
-        @extends gtk4::Widget, gtk4::Window, libadwaita::Window,
-        @implements gtk4::Accessible, gtk4::Buildable, gtk4::ConstraintTarget, gtk4::Native, gtk4::Root, gtk4::ShortcutManager;
-}
-
-impl ShortcutsDialog {
-    pub fn new(parent: &impl IsA<gtk4::Window>) -> Self {
-        let obj: Self = glib::Object::new();
-        obj.set_transient_for(Some(parent));
-        obj.set_modal(true);
-        obj
-    }
+    dialog
 }
