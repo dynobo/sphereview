@@ -20,7 +20,6 @@ fn main() {
     println!("cargo:rerun-if-changed=resources/photosphereviewer/src/style.css");
     println!("cargo:rerun-if-changed=resources/photosphereviewer/public/demo.webp");
     println!("cargo:rerun-if-changed=resources/data/window.blp");
-    println!("cargo:rerun-if-changed=resources/data/shortcuts.blp");
     println!("cargo:rerun-if-changed=resources/io.github.dynobo.sphereview.gresource.xml");
     println!("cargo:rerun-if-changed=resources/io.github.dynobo.sphereview.gresource");
 
