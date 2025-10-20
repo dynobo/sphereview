@@ -299,7 +299,7 @@ impl Window {
             .license_type(gtk4::License::MitX11)
             .version(crate::APP_VERSION)
             .website("https://github.com/dynobo/sphereview")
-            .issue_url("https://github.com/dynobo/sphereview")
+            .issue_url("https://github.com/dynobo/sphereview/issues")
             .application_icon(crate::APP_ID)
             .developer_name("by dynobo")
             .debug_info(format!(
