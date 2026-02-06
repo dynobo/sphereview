@@ -100,5 +100,5 @@ jobs:
           && github.event.pull_request.head.repo.fork == false
         with:
           body: "See [changelog](https://github.com/dynobo/sphereview/blob/main/CHANGELOG) for details."
-          draft: true
+          draft: false
           prerelease: false
