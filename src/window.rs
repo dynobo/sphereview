@@ -232,15 +232,19 @@ impl Window {
 
     fn setup_menu(&self) {
         let imp = self.imp();
-
         let menu = gio::Menu::new();
         menu.append(Some("Keyboard Shortcuts"), Some("win.keyboard-shortcuts"));
         menu.append(Some("About SphereView"), Some("win.about"));
-
         let popover_menu = gtk4::PopoverMenu::from_model(Some(&menu));
 
         let menu_button = imp.menu_button.get();
         menu_button.set_popover(Some(&popover_menu));
+
+        let action = gio::SimpleAction::new("toggle-menu", None);
+        action.connect_activate(move |_, _| {
+            menu_button.activate();
+        });
+        self.add_action(&action);
     }
 
     fn setup_open_file_button(&self) {
