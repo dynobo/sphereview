@@ -5,6 +5,7 @@
 ## v0.1.5 (2026-02-06)
 
 - Update to latest dependencies (PhotoSphereViewer 5.15).
+- Fix "menu"-key opening a context menu. Opens the application menu now. ([#33](https://github.com/dynobo/sphereview/pull/26))
 
 ## v0.1.4 (2025-10-17)
 

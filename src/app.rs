@@ -44,6 +44,7 @@ impl App {
         app.set_accels_for_action("win.keyboard-shortcuts", &["<Ctrl>question"]);
         app.set_accels_for_action("win.toggle-fullscreen", &["F11"]);
         app.set_accels_for_action("win.open-file", &["<Ctrl>o"]);
+        app.set_accels_for_action("win.toggle-menu", &["Menu"]);
     }
 
     fn setup_flags(app: &Application) {
