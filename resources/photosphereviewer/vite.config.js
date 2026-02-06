@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import htmlMinify from 'vite-plugin-html-minify'
+import htmlMinify from 'vite-plugin-html-minifier'
 import { viteSingleFile } from "vite-plugin-singlefile"
 
 export default defineConfig({

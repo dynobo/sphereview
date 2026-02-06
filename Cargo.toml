@@ -1,21 +1,21 @@
 [package]
 name = "sphereview"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2024"
 build = "build.rs"
 
 [dependencies]
-gtk4 = { version = "0.10.1", features = ["v4_20", "blueprint"] }
-glib = { version = "0.21.2", features = ["v2_84"] }
-gio = { version = "0.21.2", features = ["v2_84"] }
-libadwaita = { version = "0.8.0", features = ["v1_8"] }
+gtk4 = { version = "0.10.3", features = ["v4_20", "blueprint"] }
+glib = { version = "0.21.5", features = ["v2_84"] }
+gio = { version = "0.21.5", features = ["v2_84"] }
+libadwaita = { version = "0.8.1", features = ["v1_8"] }
 webkit6 = "0.5.0"
 base64 = "0.22.1"
-log = "0.4.28"
+log = "0.4.29"
 env_logger = "0.11.8"
 once_cell = "1.21.3"
 
 [dev-dependencies]
-toml = "0.9.8"
+toml = "0.9.11"
 roxmltree = "0.21.1"
-regex = "1.12.2"
+regex = "1.12.3"
