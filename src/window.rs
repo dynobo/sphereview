@@ -125,6 +125,24 @@ impl Window {
         });
         window.add_action(&shortcuts_action);
 
+        // Toggle navbar action
+        let toggle_navbar_action =
+            gio::SimpleAction::new_stateful("toggle-navbar", None, &true.to_variant());
+        let window_weak = self.downgrade();
+        toggle_navbar_action.connect_change_state(move |action, value| {
+            let Some(window) = window_weak.upgrade() else {
+                return;
+            };
+            if let Some(state) = value {
+                if let Some(new_state) = state.get::<bool>() {
+                    action.set_state(state);
+                    window.set_navbar_visibility(new_state);
+                }
+            }
+        });
+
+        window.add_action(&toggle_navbar_action);
+
         // Fullscreen action
         let fullscreen_action = gio::SimpleAction::new("toggle-fullscreen", None);
         let window_weak = self.downgrade();
@@ -233,6 +251,7 @@ impl Window {
     fn setup_menu(&self) {
         let imp = self.imp();
         let menu = gio::Menu::new();
+        menu.append(Some("Show Navigation Bar"), Some("win.toggle-navbar"));
         menu.append(Some("Keyboard Shortcuts"), Some("win.keyboard-shortcuts"));
         menu.append(Some("About SphereView"), Some("win.about"));
         let popover_menu = gtk4::PopoverMenu::from_model(Some(&menu));
@@ -363,6 +382,19 @@ impl Window {
             };
             if let Err(e) = window.show_panorama(Some(&path)) {
                 error!("Failed to show image: {}", e);
+            }
+        });
+    }
+
+    fn set_navbar_visibility(&self, visible: bool) {
+        let imp = self.imp();
+        let webview = imp.web_view.get();
+        let method = if visible { "show" } else { "hide" };
+        let js = format!("window.SphereViewer.navbar.{}();", method);
+
+        webview.evaluate_javascript(&js, None, None, None::<&gio::Cancellable>, |result| {
+            if let Err(e) = result {
+                error!("Failed to evaluate JavaScript: {}", e);
             }
         });
     }

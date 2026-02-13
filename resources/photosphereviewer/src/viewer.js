@@ -4,7 +4,7 @@ import '@photo-sphere-viewer/core/index.css';
 import './style.css';
 
 
-const viewer = new Viewer({
+window.SphereViewer = new Viewer({
     container: document.querySelector('#viewer'),
     keyboard: "always",
     panorama: window.location.pathname.endsWith("index.html") ? "demo.webp" : "",
@@ -68,7 +68,7 @@ window.setPanoramaImageFromBase64 = function (base64, mimeType) {
         // Create blob directly from the binary data
         const blob = new Blob([bytes], { type: mimeType });
         currentObjectUrl = URL.createObjectURL(blob);
-        viewer.setPanorama(currentObjectUrl);
+        window.SphereViewer.setPanorama(currentObjectUrl);
     } catch (error) {
         console.error('Error loading panorama image:', error);
     }
