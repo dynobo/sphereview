@@ -8,6 +8,10 @@ pub fn create_shortcuts_dialog() -> libadwaita::ShortcutsDialog {
         "win.open-file",
     ));
     general_section.add(libadwaita::ShortcutsItem::from_action(
+        "Toggle Navigation Bar",
+        "win.toggle-navbar",
+    ));
+    general_section.add(libadwaita::ShortcutsItem::from_action(
         "Toggle Fullscreen",
         "win.toggle-fullscreen",
     ));

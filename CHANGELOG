@@ -2,6 +2,10 @@
 
 # Changelog
 
+## v0.1.6 (2026-02-13)
+
+- Add option to show/hide the toolbar for the sphere navigation.
+
 ## v0.1.5 (2026-02-06)
 
 - Update to latest dependencies (PhotoSphereViewer 5.15).
