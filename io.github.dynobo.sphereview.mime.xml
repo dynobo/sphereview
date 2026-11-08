@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <!-- Insta360 photos. An .insp is a JPEG with the camera's own trailer after
+       it, holding both lenses' fisheye circles side by side.
+
+       The trader ends the file, and shared-mime-info can only match at offsets
+       counted from the start, so the trailer cannot be used to recognise the
+       type: it is matched by extension instead.
+
+       Deliberately not declared as a subclass of image/jpeg. It is one, but a
+       reader that treats it as an ordinary JPEG shows the two circles, so it
+       should not be handed to JPEG viewers and thumbnailers by inheritance. -->
+  <mime-type type="image/x-insta360-insp">
+    <comment>Insta360 photo</comment>
+    <comment xml:lang="de">Insta360-Foto</comment>
+    <icon name="io.github.dynobo.sphereview"/>
+    <glob pattern="*.insp" case-sensitive="false"/>
+  </mime-type>
+</mime-info>
