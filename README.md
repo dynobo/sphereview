@@ -39,6 +39,7 @@ flatpak install flathub io.github.dynobo.sphereview
 - Lean interface with minimal features
 - 100% offline, no telemetry
 - Supports Equirectanglar projection (e.g. used by Google Camera)
+- Supports Dual Fisheye projection, including Insta360 `.insp` photos with their own lens calibration
 - Supports formats like JPEG, PNG, WEBP
 
 ## Screencast

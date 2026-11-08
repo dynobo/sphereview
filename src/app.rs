@@ -45,6 +45,7 @@ impl App {
         app.set_accels_for_action("win.open-file", &["<Ctrl>o"]);
         app.set_accels_for_action("win.toggle-menu", &["Menu"]);
         app.set_accels_for_action("win.toggle-navbar", &["<Ctrl>n"]);
+        app.set_accels_for_action("win.toggle-projection", &["<Ctrl>d"]);
     }
 
     fn setup_flags(app: &Application) {

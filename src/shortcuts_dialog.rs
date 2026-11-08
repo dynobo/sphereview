@@ -12,6 +12,10 @@ pub fn create_shortcuts_dialog() -> libadwaita::ShortcutsDialog {
         "win.toggle-navbar",
     ));
     general_section.add(libadwaita::ShortcutsItem::from_action(
+        "Toggle Projection",
+        "win.toggle-projection",
+    ));
+    general_section.add(libadwaita::ShortcutsItem::from_action(
         "Toggle Fullscreen",
         "win.toggle-fullscreen",
     ));
