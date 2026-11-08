@@ -1,4 +1,3 @@
-use gio::{self, prelude::*};
 use gtk4::prelude::*;
 use libadwaita::Application;
 

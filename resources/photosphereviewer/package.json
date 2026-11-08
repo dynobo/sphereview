@@ -11,12 +11,12 @@
   },
   "devDependencies": {
     "http-server": "^14.1.1",
-    "vite": "^7.3.1",
+    "vite": "^8.3.6",
     "vite-plugin-html-minifier": "^1.0.5",
-    "vite-plugin-singlefile": "^2.3.0"
+    "vite-plugin-singlefile": "^2.3.4"
   },
   "dependencies": {
-    "@photo-sphere-viewer/autorotate-plugin": "^5.14.1",
-    "@photo-sphere-viewer/core": "^5.14.1"
+    "@photo-sphere-viewer/autorotate-plugin": "^5.15.1",
+    "@photo-sphere-viewer/core": "^5.15.1"
   }
 }
