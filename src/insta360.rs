@@ -26,6 +26,23 @@
 //! Layout and field meanings: `golblick`'s `docs/formats/insta360.md` (facts
 //! about the container, measured from camera files), plus the calibration string
 //! verified against a real Insta360 ONE file in `tests/insta360_trailer.rs`.
+//!
+//! What the trailer does *not* carry: which way is up. Insta360's own app shows
+//! every photo level, but the camera's attitude at capture is not in the file for
+//! the models measured here (ONE RS, ONE X2). Searching a photo for it turns up:
+//!
+//!  - the records: `0x0101` metadata, `0x0200` a downscaled copy of the same two
+//!    fisheye circles, `0x0900` and `0x0b00` empty. No gyro record.
+//!  - the metadata's own fields: identity, model, firmware, the calibration, the
+//!    image size, the DCIM path, and small rotations (doubles and near-identity
+//!    quaternions) of a degree or two. Those are lens alignment refinements, not
+//!    a camera attitude.
+//!  - the JPEG's XMP: absent, so no `GPano:PosePitchDegrees`/`PoseRollDegrees`.
+//!  - the EXIF MakerNote: empty.
+//!
+//! Both files measured were shot rolled, one by 180° and one by 90°, which rules
+//! out a per-model convention as well. A viewer can only reproduce the frame the
+//! sensors recorded; levelling it needs the IMU at capture, or a manual control.
 
 /// Marks the end of the trailer, and so the end of the file.
 pub const MAGIC: &[u8; 32] = b"8db42d694ccc418790edff439fe026bf";
