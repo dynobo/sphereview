@@ -16,7 +16,7 @@ fn run_command(command: &str, args: &[&str], dir: &str) {
 
 fn main() {
     println!("cargo:rerun-if-changed=resources/photosphereviewer/index.html");
-    println!("cargo:rerun-if-changed=resources/photosphereviewer/src/viewer.js");
+    println!("cargo:rerun-if-changed=resources/photosphereviewer/src");
     println!("cargo:rerun-if-changed=resources/photosphereviewer/src/style.css");
     println!("cargo:rerun-if-changed=resources/photosphereviewer/public/demo.webp");
     println!("cargo:rerun-if-changed=resources/data/window.blp");
@@ -29,6 +29,7 @@ fn main() {
         run_command("npm", &["ci", "--offline"], "resources/photosphereviewer");
     }
 
+    run_command("npm", &["test"], "resources/photosphereviewer");
     run_command("npm", &["run", "build"], "resources/photosphereviewer");
 
     run_command(

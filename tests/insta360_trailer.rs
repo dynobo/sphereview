@@ -358,7 +358,7 @@ fn params_json_carries_what_the_shader_needs() {
         "\"rotation\":[0,0,90]",
         "\"width\":6912",
         "\"height\":3456",
-        "\"theta_max_deg\":194",
+        "\"fov_deg\":194",
         "\"yaw_deg\":4.116",
     ] {
         assert!(json.contains(expected), "missing {expected} in {json}");

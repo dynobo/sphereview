@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "test": "node --test src/*.test.js",
     "preview": "vite preview",
     "debug": "http-server ./dist -p 8080 -o index.html"
   },

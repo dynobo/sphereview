@@ -39,11 +39,14 @@ const MAX_PAD_LEN: usize = 64;
 /// How far from the end of the file the trailer may end.
 const MAGIC_SCAN_LEN: usize = 1024 * 1024;
 
-/// The angle a lens rim corresponds to. Not in the file: measured per camera.
+/// What a lens sees across its fisheye circle. Not in the file: measured per
+/// camera.
 ///
-/// 194° is the value measured for the OneR, X3 and X5. Other models are
-/// unmeasured, so this is a default rather than a fact.
-pub const DEFAULT_THETA_MAX_DEG: f32 = 194.0;
+/// The rim of the circle is at *half* this angle from the lens axis, so this is a
+/// field of view, not a maximum angle. 194° is the value measured for the OneR,
+/// ONE RS, X2, X3 and X5. Other models are unmeasured, so this is a default
+/// rather than a fact.
+pub const DEFAULT_FOV_DEG: f32 = 194.0;
 
 /// A record id holding the camera's model, firmware and calibration.
 const METADATA_RECORD_ID: u16 = 0x0101;
@@ -120,12 +123,12 @@ impl Trailer {
 
         Some(format!(
             "{{\"lens_count\":{},\"lens\":[{}],\"width\":{},\"height\":{},\
-\"theta_max_deg\":{},\"yaw_deg\":{:.3},\"model\":\"{}\"}}",
+\"fov_deg\":{},\"yaw_deg\":{:.3},\"model\":\"{}\"}}",
             calibration.lens_count,
             lenses.join(","),
             calibration.width,
             calibration.height,
-            DEFAULT_THETA_MAX_DEG,
+            DEFAULT_FOV_DEG,
             calibration.relative_yaw_degrees().unwrap_or(0.0),
             escape_json(self.model.as_deref().unwrap_or_default())
         ))

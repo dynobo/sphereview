@@ -161,7 +161,7 @@ mod tests {
             .dual_fisheye
             .expect("the fixture carries a calibration");
 
-        for expected in ["\"lens_count\":2", "\"theta_max_deg\":194", "\"lens\":["] {
+        for expected in ["\"lens_count\":2", "\"fov_deg\":194", "\"lens\":["] {
             assert!(params.contains(expected), "missing {expected} in {params}");
         }
 

@@ -38,7 +38,10 @@ from PIL import Image, ImageDraw
 # rotations of the two lenses in the body.
 HEIGHT = 1024
 WIDTH = 2 * HEIGHT
-THETA_MAX_DEG = 194.0
+# What each lens sees across its circle. Its rim is at half this angle from the
+# lens axis - the first version of the viewer treated it as a half-angle, which
+# stretched the sphere by 2x radially.
+FOV_DEG = 194.0
 LENS_RADIUS = (0.4734, 0.4784)          # as a fraction of the image height
 LENS_CENTER = ((0.4941, 0.5061), (1.5044, 0.5008))  # x in image widths / height, y / height
 LENS_ROTATION = ((0.0, 0.0, 90.0), (0.544, -1.614, 94.116))  # degrees
@@ -124,7 +127,7 @@ def fisheye_pair(equirect: Image.Image) -> np.ndarray:
     the angle from that lens's axis picks the direction on the sphere.
     """
     pixels = np.asarray(equirect.convert("RGB"), dtype=np.float64)
-    theta_max = np.deg2rad(THETA_MAX_DEG)
+    theta_rim = np.deg2rad(FOV_DEG / 2)
 
     out = np.zeros((HEIGHT, WIDTH, 3), dtype=np.float64)
     yy, xx = np.mgrid[0:HEIGHT, 0:WIDTH]
@@ -139,7 +142,7 @@ def fisheye_pair(equirect: Image.Image) -> np.ndarray:
         dy = cy - yy
         rho = np.hypot(dx, dy) / radius
         inside = rho <= 1.0
-        theta = rho * theta_max
+        theta = rho * theta_rim
 
         # Angle around the lens axis, then undone by the lens's roll.
         azimuth = np.arctan2(dy, dx) - np.deg2rad(LENS_ROTATION[index][2])
