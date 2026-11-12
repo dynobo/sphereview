@@ -582,10 +582,15 @@ impl Window {
 /// already seen - a projection switch re-sends the same one - from a new one.
 /// It keys the rotation the page remembers per photo. The demo image has no
 /// path and hashes to whatever `None` hashes to, which is stable too.
+///
+/// Cut down to 53 bits, the width of a double's mantissa: the key travels to
+/// the page as a number literal, and a wider one would arrive rounded, which
+/// would make two photos share a rotation. A collision is now a 1 in 2^53
+/// accident instead, and the worst it costs is one photo inheriting another's.
 fn file_key(path: Option<&Path>) -> u64 {
     let mut hasher = DefaultHasher::new();
     path.hash(&mut hasher);
-    hasher.finish()
+    hasher.finish() & ((1 << 53) - 1)
 }
 
 /// How the image is shown: flat, or wrapped on a sphere.

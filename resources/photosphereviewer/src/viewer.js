@@ -133,8 +133,10 @@ document.addEventListener('keydown', function (event) {
 // Keep reference to blob url for memory management
 let currentObjectUrl = null;
 
-// `projection` is absent for the flat view, holds the camera's calibration when
-// the file has one, and `{ fallback: true }` when it does not.
+// `projection` is `null` for the flat view, holds the camera's calibration when
+// the file has one, and `{ fallback: true }` when it does not. `fileKey` is the
+// photo's path hash (src/window.rs): the same photo keeps its rotation when the
+// projection changes, a different one starts level.
 window.setPanoramaImageFromBase64 = function (base64, mimeType, projection, fileKey) {
     // Clean memory allocated for the last image's blob 
     if (currentObjectUrl) {
