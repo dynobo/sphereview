@@ -38,10 +38,25 @@ const ROTATE_ICON = `
               d="M75.68 24.39L58.18 12.15A3 3 0 0 0 53.47 14.35L51.76 33.88A3 3 0 0 0 56.02 36.86L75.37 27.84A2 2 0 0 0 75.68 24.39Z"/>
     </svg>`;
 
+// The rotation each photo was last left at, for this run only, keyed by the hash
+// of its path (src/window.rs). A projection switch re-sends the same file and
+// the viewer would otherwise come back level, and a photo opened again later
+// comes back as it was left.
+const rollByFile = new Map();
+
+// The file the viewer is showing, so the rotate button knows whose rotation it
+// is changing.
+let currentFileKey;
+
+function rememberedRoll(fileKey) {
+    return rollByFile.get(fileKey) ?? 0;
+}
+
 function rotatePanorama(viewer) {
     const correction = viewer.config.sphereCorrection ?? {};
     // The option's parser keeps roll within [-PI, PI].
     const roll = (((correction.roll ?? 0) + ROTATE_STEP + Math.PI) % (2 * Math.PI)) - Math.PI;
+    rollByFile.set(currentFileKey, roll);
     viewer.setOption('sphereCorrection', { ...correction, roll });
 }
 
@@ -120,7 +135,7 @@ let currentObjectUrl = null;
 
 // `projection` is absent for the flat view, holds the camera's calibration when
 // the file has one, and `{ fallback: true }` when it does not.
-window.setPanoramaImageFromBase64 = function (base64, mimeType, projection) {
+window.setPanoramaImageFromBase64 = function (base64, mimeType, projection, fileKey) {
     // Clean memory allocated for the last image's blob 
     if (currentObjectUrl) {
         URL.revokeObjectURL(currentObjectUrl);
@@ -138,18 +153,18 @@ window.setPanoramaImageFromBase64 = function (base64, mimeType, projection) {
         const blob = new Blob([bytes], { type: mimeType });
         currentObjectUrl = URL.createObjectURL(blob);
 
-        // `setPanorama` hands the previous correction to the next image, so a roll
-        // set on a fisheye photo would tilt a flat one, with no button left to
-        // straighten it.
+        // The roll belongs to the photo, not to the projection: a flat view stays
+        // level, and the rotation waits for the dual fisheye view. Passing
+        // `sphereCorrection` every time says so, rather than relying on the
+        // viewer handing the last image's correction to the next one.
+        currentFileKey = fileKey;
         const correction = window.SphereViewer.config.sphereCorrection ?? {};
-        const options = correction.roll
-            ? { sphereCorrection: { ...correction, roll: 0 } }
-            : undefined;
+        const roll = projection ? rememberedRoll(fileKey) : 0;
 
         setRotateButtonVisible(Boolean(projection));
         window.SphereViewer.setPanorama(
             projection ? { path: currentObjectUrl, projection } : currentObjectUrl,
-            options
+            { sphereCorrection: { ...correction, roll } }
         );
     } catch (error) {
         console.error('Error loading panorama image:', error);
