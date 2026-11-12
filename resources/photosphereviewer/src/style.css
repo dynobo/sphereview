@@ -3,3 +3,7 @@ html, body { margin: 0; padding: 0; height: 100%; background: #000; }
 
 /* disable blue button outlines on focus */
 .psv-button:not(.psv-button--disabled):focus-visible { outline: none; }
+
+/* The bundled icons are sized by their button, but a custom button is as wide as
+   its content, leaving the icon's width: 100% nothing to resolve against. */
+.psv-custom-button .psv-button-svg { width: 20px; height: 20px; }

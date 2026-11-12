@@ -16,10 +16,26 @@ import { SphereViewAdapter } from './adapter.js';
  */
 const ROTATE_STEP = Math.PI / 2;
 
+/*
+ * A clockwise arrow, on the same 100x100 grid as the bundled icons and with the
+ * same 11 unit stroke, which is what the zoom buttons' ring is drawn with.
+ *
+ * The ring runs clockwise from 2 o'clock round to 12 o'clock, so its head sits
+ * where the turn ends and points the way the content goes: to the right. The
+ * head is a triangle whose base is centred on the ring's centreline and whose
+ * axis is the tangent there, so it grows out of the stroke rather than hanging
+ * off one side of it. Its corners are arcs of their own radius, since a fill has
+ * no line joins to round off.
+ *
+ * The class is the one the viewer puts on the icons of its own buttons, and it
+ * carries the sizing and the hover zoom; buttons given `content` do not get it.
+ */
 const ROTATE_ICON = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <path fill="currentColor" d="M50 22a28 28 0 1 1-19.8 8.2l-8.5-8.5A40 40 0 1 0 50 10z"/>
-        <path fill="currentColor" d="M50 2 26 14l24 12z"/>
+    <svg class="psv-button-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <path fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round"
+              d="M78.19 43.74A30 30 0 1 1 52.61 24.11"/>
+        <path fill="currentColor"
+              d="M75.68 24.39L58.18 12.15A3 3 0 0 0 53.47 14.35L51.76 33.88A3 3 0 0 0 56.02 36.86L75.37 27.84A2 2 0 0 0 75.68 24.39Z"/>
     </svg>`;
 
 function rotatePanorama(viewer) {
@@ -31,10 +47,25 @@ function rotatePanorama(viewer) {
 
 const rotateButton = {
     id: 'sphereview-rotate',
-    title: 'Rotate a quarter turn',
+    title: 'Rotate 90°',
     content: ROTATE_ICON,
+    // Custom buttons hard-code hoverScale to false, but the class it stands for
+    // is all the stylesheet needs to zoom the icon on hover like its neighbours.
+    className: 'psv-button--hover-scale',
     onClick: rotatePanorama,
 };
+
+/*
+ * The roll turns the two lens circles of a dual fisheye photo, so the button is
+ * only offered for that projection: a flat panorama brings its own horizon.
+ *
+ * The button stays in the navbar and is shown or hidden instead, which keeps the
+ * layout right - the navbar leaves hidden buttons out when it decides whether
+ * the others still fit.
+ */
+function setRotateButtonVisible(visible) {
+    window.SphereViewer.navbar.getButton(rotateButton.id, false)?.toggle(visible);
+}
 
 window.SphereViewer = new Viewer({
     container: document.querySelector('#viewer'),
@@ -67,6 +98,9 @@ window.SphereViewer = new Viewer({
         }],
     ],
 });
+
+// The viewer opens on the flat demo image, where there is nothing to rotate.
+setRotateButtonVisible(false);
 
 // Remap +/- for zooming, as work around for keyboardActions not working properly 
 // for keys which need modifiers
@@ -103,8 +137,19 @@ window.setPanoramaImageFromBase64 = function (base64, mimeType, projection) {
         // Create blob directly from the binary data
         const blob = new Blob([bytes], { type: mimeType });
         currentObjectUrl = URL.createObjectURL(blob);
+
+        // `setPanorama` hands the previous correction to the next image, so a roll
+        // set on a fisheye photo would tilt a flat one, with no button left to
+        // straighten it.
+        const correction = window.SphereViewer.config.sphereCorrection ?? {};
+        const options = correction.roll
+            ? { sphereCorrection: { ...correction, roll: 0 } }
+            : undefined;
+
+        setRotateButtonVisible(Boolean(projection));
         window.SphereViewer.setPanorama(
-            projection ? { path: currentObjectUrl, projection } : currentObjectUrl
+            projection ? { path: currentObjectUrl, projection } : currentObjectUrl,
+            options
         );
     } catch (error) {
         console.error('Error loading panorama image:', error);
