@@ -1,5 +1,4 @@
 mod app;
-mod image;
 mod shortcuts_dialog;
 mod window;
 
