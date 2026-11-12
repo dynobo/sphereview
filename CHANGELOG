@@ -2,6 +2,10 @@
 
 # Changelog
 
+## Unreleased
+
+- Keep a photo's rotation when switching between the fisheye and equirectangular projections.
+
 ## v0.1.6 (2026-02-13)
 
 - Add option to show/hide the toolbar for the sphere navigation.
