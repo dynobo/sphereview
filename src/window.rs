@@ -5,7 +5,9 @@ use libadwaita::{self, prelude::*, subclass::prelude::*};
 use log::{debug, error};
 use once_cell::sync::Lazy;
 use std::cell::RefCell;
-use std::path::PathBuf;
+use std::collections::hash_map::DefaultHasher;
+use std::hash::{Hash, Hasher};
+use std::path::{Path, PathBuf};
 use webkit6::{self, WebView, prelude::*};
 
 use crate::shortcuts_dialog::create_shortcuts_dialog;
@@ -537,24 +539,29 @@ impl Window {
             return Err("No panorama data available".to_string());
         }
 
-        let argument = imp.projection().argument(panorama.dual_fisheye.as_deref());
+        // Four arguments even for a flat image: the page keys each photo's
+        // rotation by the file key, and needs it whichever way the photo is
+        // shown. The third argument is the projection, `null` for an
+        // equirectangular image.
+        let projection = imp
+            .projection()
+            .argument(panorama.dual_fisheye.as_deref())
+            .unwrap_or_else(|| "null".to_string());
+        let key = file_key(imp.active_panorama_file.borrow().as_deref());
 
         let base64 = base64::engine::general_purpose::STANDARD.encode(&panorama.data);
-        // The third argument is the projection, absent for an equirectangular image.
-        let params = argument
-            .map(|argument| format!(", {argument}"))
-            .unwrap_or_default();
         let js = format!(
-            "window.setPanoramaImageFromBase64('{}', '{}'{});",
-            base64, panorama.mime_type, params
+            "window.setPanoramaImageFromBase64('{}', '{}', {}, {});",
+            base64, panorama.mime_type, projection, key
         );
 
         debug!(
-            "Injecting panorama file '{:?}', mime_type: {}, base64 length: {}, projection: {:?}",
+            "Injecting panorama file '{:?}', mime_type: {}, base64 length: {}, projection: {:?}, file key: {}",
             imp.active_panorama_file.borrow(),
             panorama.mime_type,
             base64.len(),
-            imp.projection()
+            imp.projection(),
+            key
         );
 
         webview.evaluate_javascript(&js, None, None, None::<&gio::Cancellable>, |result| {
@@ -569,6 +576,16 @@ impl Window {
     pub fn set_initial_file(&self, path: Option<PathBuf>) {
         *self.imp().cli_arg_panorama_file.borrow_mut() = path;
     }
+}
+
+/// A stable id for a photo within this run, so the page can tell a file it has
+/// already seen - a projection switch re-sends the same one - from a new one.
+/// It keys the rotation the page remembers per photo. The demo image has no
+/// path and hashes to whatever `None` hashes to, which is stable too.
+fn file_key(path: Option<&Path>) -> u64 {
+    let mut hasher = DefaultHasher::new();
+    path.hash(&mut hasher);
+    hasher.finish()
 }
 
 /// How the image is shown: flat, or wrapped on a sphere.
